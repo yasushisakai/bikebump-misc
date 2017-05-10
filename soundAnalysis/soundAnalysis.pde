@@ -1,16 +1,18 @@
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 
+
 String fileName;
 Minim minim;
 AudioPlayer player;
 FFT fft;
-int bufferSize = 1024;
+int bufferSize = 1024; // 1024 is used in web client
 int specSize;
 float[] bands;
 
 // layout
 int margin = 10;
+int innerWidth, innerHeight;
 PFont font;
 float lowerBound = 1000;
 int lowerIndex;
@@ -19,18 +21,27 @@ int higherIndex;
 float[] gridFreq = {1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000};
 int [] gridIndex = new int [gridFreq.length];
 float [] readMidFreq = new float [gridFreq.length]; 
-int graphHeight = 250;
+int graphHeight;
+int stripWidth;
+
+
+InfoBar infobar;
 
 void setup () {
 
-  size(640,480);
+  size(1920,1080);
+  innerWidth = width - margin * 2;
+  innerHeight = height - margin * 2;
   
-  fileName = "sound.wav";
+  // fileName = "single_ding.wav";
+  fileName = "single_ding_silver.wav";
+  // fileName = "single_ding_bronze.wav"
 
   minim = new Minim(this);
   player = minim.loadFile(fileName, bufferSize);
   player.play();
 
+  graphHeight = height / 2;
   fft = new FFT(player.bufferSize(), player.sampleRate());
   fft.noAverages();
   specSize = fft.specSize();
@@ -39,6 +50,8 @@ void setup () {
 
   lowerIndex = fft.freqToIndex(lowerBound);
   higherIndex = fft.freqToIndex(higherBound);
+  
+  stripWidth = (width - margin * 2) / (higherIndex - lowerIndex);
 
   for (int i = 0; i < gridFreq.length; i++) {
     gridIndex[i] = fft.freqToIndex(gridFreq[i]);
@@ -51,6 +64,8 @@ void setup () {
   textFont(font);
   textAlign(LEFT, TOP);
   player.skip(-6000);
+
+  infobar = new InfoBar(fileName);
 }
 
 void draw () {
@@ -59,16 +74,18 @@ void draw () {
   stroke(20);
   // rect(margin, margin, width - margin*2, height - margin*2);
   
-  drawTitle(fileName);
+//  drawTitle(fileName);
+  infobar.draw();
   
   if (player.isPlaying()) {
     fft.forward(player.mix);
   }
   // println("spectrum size", fft.specSize());
   
+  // grids!
   pushStyle();
   for (int i = 0; i < gridFreq.length; i++) {
-    float x = map(gridIndex[i], lowerIndex, higherIndex, margin, width - margin * 2);
+    float x = map(gridIndex[i], lowerIndex, higherIndex, margin + stripWidth / 2, width - margin - stripWidth / 2);
     float sy = margin * 6;
     float ey = margin * 6 + graphHeight;
     stroke(20);
@@ -76,14 +93,26 @@ void draw () {
     line (x, sy, x, ey);
     fill(20);
     noStroke();
-    text(readMidFreq[i], x - textWidth(round(readMidFreq[i]) + "") / 2.0, margin * 6 + graphHeight + 5); 
+    String midFreq = round(readMidFreq[i]) + "";
+    text(midFreq, x - textWidth(midFreq) / 2.0, margin * 6 + graphHeight + 5); 
   }
   popStyle();
 
+  // stripes!
+  pushStyle();
+  noStroke();
+  fill(255, 70);
+  for(int i = lowerIndex; i <= higherIndex; i += 2){
+    float x = map(i, lowerIndex, higherIndex, margin, width - margin - stripWidth);
+    float y = margin * 6;
+    rect(x, y, stripWidth, graphHeight);
+  }
+  
+  popStyle();
 
+  pushStyle();
+  strokeWeight(2);
   noFill();
-  pushMatrix();
-  translate(margin, margin * 6);
   beginShape();
   
   for (int i = lowerIndex; i < higherIndex; i++) {
@@ -91,26 +120,26 @@ void draw () {
       float bandValue = fft.getBand(i);
       // https://github.com/ddf/Minim/blob/master/examples/Analysis/FFT/Windows/Windows.pde
       float bandDB = max(-150, 20 * log(2 * bandValue / fft.timeSize())); // clamp minimum to -150
-      float x = map(i, lowerIndex, higherIndex, 0, width - margin * 2);
-      float y = getBandY(bandDB, graphHeight);
+      float x = map(i, lowerIndex, higherIndex, margin + stripWidth / 2, width - margin - stripWidth / 2);
+      float y = margin * 6 + getBandY(bandDB, graphHeight);
       vertex(x, y);
+      //point(x,y);
     }
   }
 
   endShape();
-  popMatrix();
   // println(maxValue, minValue);
-
+  popStyle();
   // drawint circle indicating current position 
-  float posX = map(player.position(), 0, player.length(), margin, width * 0.80);
-  line(margin, height - margin - 20, width * 0.80, height - margin - 20);
+  float posX = map(player.position(), 0, player.length(), margin, width * 0.90);
+  line(margin, height - margin - 20, width * 0.90, height - margin - 20);
   
   String currentFrame = String.format("%04d", player.position());
   String posText = currentFrame + "/" + player.length();
   pushStyle();
   fill(20);
   noStroke();
-  rect(width * 0.80 + margin, height - margin - 20 - 3 - 6, textWidth(posText) + 5 * 2, 3 * 2 + 13);
+  rect(width * 0.90 + margin, height - margin - 20 - 3 - 6, textWidth(posText) + 5 * 2, 3 * 2 + 13);
   fill(240);
   text(posText, width * 0.80 + margin + 5, height - margin - 20 - 6);
   popStyle();
