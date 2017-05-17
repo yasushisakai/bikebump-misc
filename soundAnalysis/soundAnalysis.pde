@@ -24,7 +24,6 @@ float [] readMidFreq = new float [gridFreq.length];
 int graphHeight;
 int stripWidth;
 
-
 InfoBar infobar;
 
 void setup () {
@@ -39,7 +38,6 @@ void setup () {
 
   minim = new Minim(this);
   player = minim.loadFile(fileName, bufferSize);
-  player.play();
 
   graphHeight = height / 2;
   fft = new FFT(player.bufferSize(), player.sampleRate());
@@ -81,6 +79,8 @@ void draw () {
     fft.forward(player.mix);
   }
   // println("spectrum size", fft.specSize());
+  
+
   
   // grids!
   pushStyle();
@@ -141,7 +141,7 @@ void draw () {
   noStroke();
   rect(width * 0.90 + margin, height - margin - 20 - 3 - 6, textWidth(posText) + 5 * 2, 3 * 2 + 13);
   fill(240);
-  text(posText, width * 0.80 + margin + 5, height - margin - 20 - 6);
+  text(posText, width * 0.90 + margin + 5, height - margin - 20 - 6);
   popStyle();
 
   fill(240);
@@ -189,14 +189,4 @@ void terminateSketch () {
   player.close();
   minim.stop();
   exit();
-}
-
-void drawTitle (String fileName) {
-  pushStyle();
-  fill(20);
-  noStroke();
-  rect(margin, margin * 2 - 3, 5 * 2 + textWidth(fileName), 3 * 2 + 13);
-  fill(240);
-  text(fileName, margin + 5, margin * 2);
-  popStyle();
 }
