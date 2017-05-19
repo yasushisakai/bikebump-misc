@@ -2,8 +2,6 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofSetFrameRate(60);
-    ofSetVerticalSync(true);
     ofBackground(backgroundColor);
     ofSetLineWidth(1.0f);
     
@@ -124,6 +122,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
     // toggle Record
     isRecordingFrames = !isRecordingFrames;
+    ofSetVerticalSync(isRecordingFrames);
 }
 
 //--------------------------------------------------------------
