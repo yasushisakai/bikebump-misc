@@ -4,8 +4,7 @@
 void ofApp::setup(){
     ofSetFrameRate(60);
     ofSetVerticalSync(true);
-    ofBackground(240, 240, 240);
-    ofDisableSmoothing();
+    ofBackground(backgroundColor);
     ofSetLineWidth(1.0f);
     
     nBandsToGet = 512;
@@ -15,21 +14,46 @@ void ofApp::setup(){
     ding.setLoop(true);
     ding.play();
     
-    bandWidth = float(ofGetWidth() - margin * 2) / float(nBandsToGet);
-    graphHeight = 200.0f;
+    //
+    // FBO
+    //
+    
+    int innerWidth = ofGetWidth() - margin * 2;
+    metaInfo.allocate(innerWidth, 50, GL_RGB);
+    
+    currentPosition.allocate(innerWidth, 50, GL_RGB);
+    
+    frequencyGraph.allocate(ofGetWidth() - margin * 2, 200, GL_RGB);
+    bandWidth = float(frequencyGraph.getWidth()) / float(nBandsToGet);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    // update sound
+    // computation part
     ofSoundUpdate();
     fft = ofSoundGetSpectrum(nBandsToGet);
     
     position = ding.getPosition();
     positionMS = zeroPad(ding.getPositionMS(), 5);
     
+    // below, writing on buffers
+    metaInfo.begin();
+        ofClear(backgroundColor);
+        ofSetColor(20, 20, 20);
+        ofDrawBitmapString(filename, 0, 10);
+        ofDrawBitmapString(positionMS, filenameRect.width + 5, 10);
+    metaInfo.end();
     
+    currentPosition.begin();
+        ofClear(backgroundColor);
+        ofSetColor(10, 10, 10);
+        ofFill();
+        ofDrawLine(0, currentPosition.getHeight() / 2, currentPosition.getWidth(), currentPosition.getHeight() / 2);
+        ofDrawCircle(currentPosition.getWidth() * position, currentPosition.getHeight() / 2, 3);
+    currentPosition.end();
+    
+    ofPolyline freqPolyline;
     vector<ofPoint> points(nBandsToGet);
     
     float maxValue = -100000;
@@ -41,33 +65,33 @@ void ofApp::update(){
             maxIndex = i;
         }
         
-        float x = margin + i * bandWidth;
-        float y = margin + 180 + graphHeight * (1 - fft[i]);
+        float x = i * bandWidth;
+        float y = frequencyGraph.getHeight() * (1.0f - (fft[i] * 0.5f));
         
         points[i] = ofPoint(x,y);
     }
     
-    frequencyGraph.clear(); // empty verticies
-    frequencyGraph.addVertices(points);
+    freqPolyline.addVertices(points);
+    
+    frequencyGraph.begin();
+        ofClear(backgroundColor);
+        ofSetColor(10, 10, 10);
+        ofNoFill();
+        freqPolyline.draw();
+    frequencyGraph.end();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     
     // info
-    ofDrawBitmapString(filename, margin, margin);
-    ofDrawBitmapString(positionMS, margin + filenameRect.width + 5, margin);
+    metaInfo.draw(margin, 20);
     
     // position
-    ofSetColor(10, 10, 10);
-    ofFill();
-    ofDrawLine(margin, margin + 80, ofGetWidth() - margin, margin + 80);
-    ofDrawCircle(margin + float(ofGetWidth() - margin * 2) * position, margin + 80, 3);
+    currentPosition.draw(margin, 50);
     
     // distribution of frequency
-    ofSetColor(10, 10, 10);
-    ofNoFill();
-    frequencyGraph.draw();
+    frequencyGraph.draw(margin, 100);
     
     // save image
     if (isRecordingFrames) {
@@ -100,7 +124,6 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
     // toggle Record
     isRecordingFrames = !isRecordingFrames;
-    
 }
 
 //--------------------------------------------------------------
@@ -130,19 +153,5 @@ void ofApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
-    
-}
-
-string ofApp::zeroPad(const int& num, const int& digits) {
-    string numString = ofToString(num);
-    int digitLeft = digits - numString.size();
-    
-    string zeros;
-    
-    for(int i = 0; i < digitLeft; i++) {
-        zeros = "0" + zeros;
-    }
-    
-    return zeros + numString;
     
 }

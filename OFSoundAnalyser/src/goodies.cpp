@@ -34,3 +34,16 @@ ofRectangle getBitMapStringBoundingBox (const std::string text) {
     return ofRectangle(0, 0, width, height);
 }
 
+std::string zeroPad(const int& num, const int& digits) {
+    std::string numString = ofToString(num);
+    int digitLeft = digits - numString.size();
+    
+    string zeros;
+    
+    for(int i = 0; i < digitLeft; i++) {
+        zeros = "0" + zeros;
+    }
+    
+    return zeros + numString;
+    
+}
