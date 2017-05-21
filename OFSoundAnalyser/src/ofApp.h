@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "goodies.h"
 
+
 class ofApp : public ofBaseApp{
     
 public:
@@ -25,21 +26,23 @@ public:
     
     // sound stuff
     ofSoundPlayer ding;
-    float* fft;
-    int nBandsToGet;
+    static const int nBandsToGet { 1024 };
+    float * fft;
     float position;
     string positionMS;
     int maxIndex;
     
+    float getFreqByIndex (const int & index);
+    
     // file stuff
     string filename;
     ofRectangle filenameRect;
-    string outDir = "out/";
+    const string outDir = "out/";
     bool isRecordingFrames = true;
     
     // layout stuff
-    ofColor backgroundColor = ofColor(240);
-    int margin = 20;
+    const ofColor backgroundColor { ofColor(240) };
+    static const int margin { 20 };
     
     // meta info
     ofFbo metaInfo;

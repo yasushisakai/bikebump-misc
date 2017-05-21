@@ -5,7 +5,6 @@ void ofApp::setup(){
     ofBackground(backgroundColor);
     ofSetLineWidth(1.0f);
     
-    nBandsToGet = 512;
     filename = "single_ding_silver.wav";
     filenameRect = getBitMapStringBoundingBox(filename);
     ding.load("sounds/" + filename);
@@ -56,7 +55,8 @@ void ofApp::update(){
     
     float maxValue = -100000;
     
-    for (int i = 0; i < nBandsToGet; i++) {
+    int i = 0;
+    for ( ; i < nBandsToGet; i++) {
         
         if (maxValue < fft[i]) {
             maxValue = fft[i];
@@ -69,11 +69,14 @@ void ofApp::update(){
         points[i] = ofPoint(x,y);
     }
     
+    ofLog(OF_LOG_NOTICE, ofToString(i));
+    
     freqPolyline.addVertices(points);
     
     frequencyGraph.begin();
         ofClear(backgroundColor);
         ofSetColor(10, 10, 10);
+        ofDrawBitmapString(ofToString(getFreqByIndex(maxIndex)), maxIndex * bandWidth, 50);
         ofNoFill();
         freqPolyline.draw();
     frequencyGraph.end();
@@ -153,4 +156,9 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
     
+}
+
+float ofApp::getFreqByIndex (const int & index) {
+    float sampleRate = 22050;
+    return index * (sampleRate / (float) nBandsToGet);
 }
