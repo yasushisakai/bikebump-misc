@@ -8,7 +8,7 @@
 
 #include "goodies.h"
 
-ofRectangle getBitMapStringBoundingBox (const std::string text) {
+ofRectangle Goodies::getBitMapStringBoundingBox (const std::string text) {
     
     std::vector<std::string> lines = ofSplitString(text, "/n");
     int maxLineLength = 0;
@@ -34,7 +34,7 @@ ofRectangle getBitMapStringBoundingBox (const std::string text) {
     return ofRectangle(0, 0, width, height);
 }
 
-std::string zeroPad(const int& num, const int& digits) {
+std::string Goodies::zeroPad(const int& num, const int& digits) {
     std::string numString = ofToString(num);
     int digitLeft = digits - numString.size();
     
@@ -46,4 +46,13 @@ std::string zeroPad(const int& num, const int& digits) {
     
     return zeros + numString;
     
+}
+
+
+void Goodies::drawCrossmark (const ofPoint& point, const int& size) {
+    const auto r = size / 2;
+    const int x = point.x;
+    const int y = point.y;
+    ofDrawLine(x - r, y - r, x + r, y + r);
+    ofDrawLine(x + r, y - r, x - r, y + r);
 }

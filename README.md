@@ -1,9 +1,8 @@
-
-
 # requirements
 
-- Install Sound Library for processing through ```Sketch -> Import Library -> Add Library -> Search for Sound -> Install ```
+based on [openframeworks](http://openframeworks.cc/)
+this uses [ofxMaxim from Maximilian](https://github.com/micknoise/Maximilian) 
+  1. clone Maximilian
+  2. ```ln -s ofdir/addons/  maximilian/repo/dir/openframeworks/ofxMaxim```
 
-# run it from terminal 
-1. Install cli tool from ```Tools -> Install "processing-java"```
-2. ``` ./soundAnalysis/run.sh ```
+
