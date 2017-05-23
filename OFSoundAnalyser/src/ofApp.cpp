@@ -5,28 +5,26 @@ using namespace Goodies;
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    filenameBoundingBox = getBitMapStringBoundingBox(filename);
-    
     soundClip.load(ofToDataPath("soundClips/" + filename));
     
-    cout << soundClip.getSummary() << endl;
+    soundInfo = summaryToSoundClipInfo(filename, soundClip.getSummary());
     
-    length = soundClip.getLength();
+    length = soundClip.getLength(); // TODO: have this data inside SoundClipInfo
     position = 0;
     bufferSize = 1024;
-    sampleRate = 44100;
     
     fft.setup(bufferSize, 512, 256);
     magnitudes = fft.magnitudes; // fft.magsToDB();
     maxIndex = -1;
     needsRecord = false;
+    nFFT = length / bufferSize;
     
     lowClampIndex = getIndexFromFreq(1500);
     highClampIndex = getIndexFromFreq(5000);
     targetScopeIndex = getIndexFromFreq(2462);
     neighborCells = 2;
     
-    ofSoundStreamSetup(2, 2, this, sampleRate, bufferSize, 4);
+    ofSoundStreamSetup(2, 2, this, soundInfo.sampleRate, bufferSize, 4);
     
     auto innerWidth = ofGetWidth() - margin * 2;
     ofBackground(white);
@@ -45,8 +43,27 @@ void ofApp::update(){
     metaInfo.begin();
     ofClear(white);
     ofSetColor(black);
-    ofDrawBitmapString(filename, 0, bitmapStringHeight);
-    ofDrawBitmapString(zeroPad(msFromStart, 4), filenameBoundingBox.getWidth() + 3, bitmapStringHeight);
+    
+    ofPushMatrix();
+    ofTranslate(0, bitmapStringHeight);
+    ofDrawBitmapString(filename + " /", 0, 0);
+    ofTranslate(getBitMapStringWidth(filename+ " /") + 3, 0);
+    string msPosition = zeroPad(msFromStart, 4) + "ms /";
+    ofDrawBitmapString(msPosition, 0, 0);
+    ofTranslate(getBitMapStringWidth(msPosition) + 3, 0);
+    ofDrawBitmapString("(" + zeroPad(position, 5) + ")", 0, 0);
+    ofPopMatrix();
+    
+    // second line
+    ofPushMatrix();
+    ofTranslate(0, bitmapStringHeight * 2.25);
+    string channels = "channels: " + ofToString(soundInfo.nChannels);
+    ofDrawBitmapString(channels, 0, 0);
+    ofTranslate(getBitMapStringWidth(channels) + 20, 0);
+    string sampleRateString = "sample rate: "+ ofToString(soundInfo.sampleRate);
+    ofDrawBitmapString(sampleRateString, 0, 0);
+    ofPopMatrix();
+    
     metaInfo.end();
     
     positionIndicator.begin();
@@ -206,7 +223,10 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
     for (int i = 0; i < bufferSize; i++) {
         double sound = soundClip.play();
         position ++;
-        if(position >= length) position = 0;
+        if(position >= length) {
+            position = 0;
+            ofExit();
+        }
         
         if (fft.process(sound)) {
             magnitudes = fft.magnitudes; //fft.magsToDB();
@@ -229,15 +249,15 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
     }
 }
 
-int ofApp::convertPositionToMS (const int & position, const int & sampleRate) {
-    return (int) (((float) position) / ((float) sampleRate) * 1000);
+int ofApp::convertPositionToMS (const int & position) {
+    return (int) (((float) position) / ((float) soundInfo.sampleRate) * 1000);
 }
 
-float ofApp::getFreqFromIndex (const int & index, const int & sampleRate) {
-    return (index + 0.5) * ((float) sampleRate / (float) bufferSize);
+float ofApp::getFreqFromIndex (const int & index) {
+    return (index + 0.5) * ((float) soundInfo.sampleRate / (float) bufferSize);
 }
 
-int ofApp::getIndexFromFreq (const float & frequency, const int & sampleRate) {
-    float unitFreq = (float) sampleRate / (float) bufferSize;
+int ofApp::getIndexFromFreq (const float & frequency) {
+    float unitFreq = (float) soundInfo.sampleRate / (float) bufferSize;
     return (int) (frequency / unitFreq);
 }

@@ -25,21 +25,22 @@ public:
     void gotMessage (ofMessage msg);
     
     void audioOut (float * output, int bufferSize, int nChannels);
-    int convertPositionToMS (const int & position, const int & sampleRate = 48000);
-    float getFreqFromIndex (const int & index, const int & sampleRate = 48000);
-    int getIndexFromFreq (const float & frequency, const int & sampleRate = 48000);
+    int convertPositionToMS (const int & positiond);
+    float getFreqFromIndex (const int & indexd);
+    int getIndexFromFreq (const float & frequency);
     
-    string filename = "single_ding_silver.wav";
+    string filename = "testRecording.wav";
+    //string filename = "single_ding_silver.wav";
     // "1kHz_44100Hz_16bit_05sec.wav";
     // "250Hz_44100Hz_16bit_05sec.wav";
-    ofRectangle filenameBoundingBox;
-    
     maxiSample soundClip;
+    Goodies::SoundClipInfo soundInfo;
     long length, position;
     int msFromStart;
-    int bufferSize, sampleRate;
+    int bufferSize;
 
     ofxMaxiFFT fft;
+    int nFFT;
     float * magnitudes;
     int maxIndex;
     bool needsRecord; // triggers everytime when fft occurs
@@ -50,7 +51,7 @@ public:
     
     const int margin = 20;
     const ofColor white {ofColor(240)};
-    const ofColor grey {ofColor(80)};
+    const ofColor grey {ofColor(120)};
     const ofColor black {ofColor(10)};
     
     ofFbo metaInfo;

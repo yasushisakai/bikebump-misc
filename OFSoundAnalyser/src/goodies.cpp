@@ -11,27 +11,47 @@
 ofRectangle Goodies::getBitMapStringBoundingBox (const std::string text) {
     
     std::vector<std::string> lines = ofSplitString(text, "/n");
-    int maxLineLength = 0;
+    int maxLineWidth = 0;
+    // we are comparing the actual width, not the number of characters in one line
     for (int i = 0; i < (int)lines.size(); i++) {
         const std::string & line(lines[i]);
-        int currentLineLength = 0;
-        for (int j= 0; j < (int)line.size(); j++) {
-            if (line[j] == '/t') {
-                currentLineLength += 8 - (currentLineLength % 8);
-            } else {
-                currentLineLength ++;
-            }
-        }
-        maxLineLength = MAX(maxLineLength, currentLineLength);
+        int currentLineWidth = Goodies::getBitMapStringWidth(line);
+        maxLineWidth = MAX(maxLineWidth, currentLineWidth);
     }
     
     int padding = 4;
-    int fontSize = 8;
     float leading = 1.7;
-    int height = lines.size() * fontSize * leading -1;
-    int width = maxLineLength * fontSize;
+    int height = lines.size() * Goodies::bitmapStringWidth * leading - 1;
     
-    return ofRectangle(0, 0, width, height);
+    return ofRectangle(0, 0, maxLineWidth, height);
+}
+
+int Goodies::getBitMapStringWidth (const std::string text) {
+    
+    int lineWidth = 0;
+    for (int i = 0; i < (int)text.size(); i++) {
+        if (text[i] == 9) {
+            lineWidth += 8 - (lineWidth % 8);
+        } else {
+            lineWidth ++;
+        }
+    }
+    return lineWidth * Goodies::bitmapStringWidth;
+}
+
+
+Goodies::SoundClipInfo Goodies::summaryToSoundClipInfo (const string & _filename, const char* _summary) {
+    
+    SoundClipInfo info;
+    
+    auto summaryList = ofSplitString(std::string(_summary), "\n");
+    info.nChannels = ofToInt(ofTrim(ofSplitString(summaryList[1], ":")[1]));
+    info.sampleRate = ofToInt(ofTrim(ofSplitString(summaryList[2], ":")[1]));
+    info.bitsPerSample = ofToInt(ofTrim(ofSplitString(summaryList[5], ":")[1]));
+    info.dataSize = ofToInt(ofTrim(ofSplitString(summaryList[6], ":")[1]));
+    info.duration = (info.dataSize * 1000.0f) / (info.nChannels * info.sampleRate * info.bitsPerSample / 8); // ms
+    
+    return info;
 }
 
 std::string Goodies::zeroPad(const int& num, const int& digits) {
