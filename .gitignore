@@ -7,10 +7,8 @@ application.windows32
 application.windows64
 application.macosx
 
-**/data/**
-**/out/**
-
-**/bin/**
+# **/bin/**
+**/bin/**.app
 
 #########################
 # openFrameworks patterns
