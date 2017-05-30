@@ -11,7 +11,12 @@
 		60510147EAEDE5F9E74AD881 /* goodies.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F8D4670566BD9D3EFA5EE /* goodies.cpp */; };
 		8358FAE532EF67E98365AEB4 /* maxiMFCC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BCF14FC367169259ACDF9BA /* maxiMFCC.cpp */; };
 		9BA0D29EF609758744F00F2A /* maximilian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A78AB13B42ED9A52919755E /* maximilian.cpp */; };
+		A2540AA41EDA38B400C54BD1 /* MetaInfoPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2540AA21EDA38B400C54BD1 /* MetaInfoPanel.cpp */; };
+		A2540AA71EDB1CE100C54BD1 /* SoundClipInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2540AA51EDB1CE100C54BD1 /* SoundClipInfo.cpp */; };
+		A2540AAB1EDB2F6100C54BD1 /* PositionIndicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2540AA91EDB2F6100C54BD1 /* PositionIndicator.cpp */; };
+		A2540AAE1EDB367D00C54BD1 /* DeltaHistoryPlotter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2540AAC1EDB367D00C54BD1 /* DeltaHistoryPlotter.cpp */; };
 		A25FDD141ED2178D00C2AD4D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A25FDD131ED2178D00C2AD4D /* Accelerate.framework */; };
+		A2937DE01ED8808D000EBBF6 /* WavePlotter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2937DDE1ED8808D000EBBF6 /* WavePlotter.cpp */; };
 		A353D59D159269DB8C6E6DB3 /* maxiAtoms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DCB648C57A348A545F143F8F /* maxiAtoms.cpp */; };
 		AEA91FDE87726B5E77672BDE /* fft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE035342977776BEDE9AAD3F /* fft.cpp */; };
 		D0AA39721278B2230D47FAAC /* maxiFFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42BCE71C16E000A5D6AABB58 /* maxiFFT.cpp */; };
@@ -67,7 +72,18 @@
 		6A2F8D4670566BD9D3EFA5EE /* goodies.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = goodies.cpp; path = src/goodies.cpp; sourceTree = SOURCE_ROOT; };
 		7A78AB13B42ED9A52919755E /* maximilian.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = maximilian.cpp; path = ../../../../openframeworks_098/addons/ofxMaxim/libs/maximilian.cpp; sourceTree = SOURCE_ROOT; };
 		7D036AAADD555641DBA2F62A /* maxiGrains.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = maxiGrains.h; path = ../../../../openframeworks_098/addons/ofxMaxim/libs/maxiGrains.h; sourceTree = SOURCE_ROOT; };
+		A2540AA21EDA38B400C54BD1 /* MetaInfoPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MetaInfoPanel.cpp; sourceTree = "<group>"; };
+		A2540AA31EDA38B400C54BD1 /* MetaInfoPanel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MetaInfoPanel.hpp; sourceTree = "<group>"; };
+		A2540AA51EDB1CE100C54BD1 /* SoundClipInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundClipInfo.cpp; sourceTree = "<group>"; };
+		A2540AA61EDB1CE100C54BD1 /* SoundClipInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundClipInfo.hpp; sourceTree = "<group>"; };
+		A2540AA91EDB2F6100C54BD1 /* PositionIndicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PositionIndicator.cpp; sourceTree = "<group>"; };
+		A2540AAA1EDB2F6100C54BD1 /* PositionIndicator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PositionIndicator.hpp; sourceTree = "<group>"; };
+		A2540AAC1EDB367D00C54BD1 /* DeltaHistoryPlotter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeltaHistoryPlotter.cpp; sourceTree = "<group>"; };
+		A2540AAD1EDB367D00C54BD1 /* DeltaHistoryPlotter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DeltaHistoryPlotter.hpp; sourceTree = "<group>"; };
 		A25FDD131ED2178D00C2AD4D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		A2937DDE1ED8808D000EBBF6 /* WavePlotter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavePlotter.cpp; sourceTree = "<group>"; };
+		A2937DDF1ED8808D000EBBF6 /* WavePlotter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WavePlotter.hpp; sourceTree = "<group>"; };
+		A2937DE11ED8825C000EBBF6 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		A6B3656889DA7FDE0A42B871 /* maxiBark.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = maxiBark.h; path = ../../../../openframeworks_098/addons/ofxMaxim/libs/maxiBark.h; sourceTree = SOURCE_ROOT; };
 		A81D888DD775C71BCD9F2ACC /* stb_vorbis.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = stb_vorbis.c; path = ../../../../openframeworks_098/addons/ofxMaxim/libs/stb_vorbis.c; sourceTree = SOURCE_ROOT; };
 		BE035342977776BEDE9AAD3F /* fft.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = fft.cpp; path = ../../../../openframeworks_098/addons/ofxMaxim/libs/fft.cpp; sourceTree = SOURCE_ROOT; };
@@ -144,6 +160,21 @@
 			name = src;
 			sourceTree = "<group>";
 		};
+		A2540AA81EDB2E7100C54BD1 /* render */ = {
+			isa = PBXGroup;
+			children = (
+				A2937DDE1ED8808D000EBBF6 /* WavePlotter.cpp */,
+				A2937DDF1ED8808D000EBBF6 /* WavePlotter.hpp */,
+				A2540AA21EDA38B400C54BD1 /* MetaInfoPanel.cpp */,
+				A2540AA31EDA38B400C54BD1 /* MetaInfoPanel.hpp */,
+				A2540AA91EDB2F6100C54BD1 /* PositionIndicator.cpp */,
+				A2540AAA1EDB2F6100C54BD1 /* PositionIndicator.hpp */,
+				A2540AAC1EDB367D00C54BD1 /* DeltaHistoryPlotter.cpp */,
+				A2540AAD1EDB367D00C54BD1 /* DeltaHistoryPlotter.hpp */,
+			);
+			name = render;
+			sourceTree = "<group>";
+		};
 		A25FDD121ED2178D00C2AD4D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,8 +219,12 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				A2540AA51EDB1CE100C54BD1 /* SoundClipInfo.cpp */,
+				A2540AA61EDB1CE100C54BD1 /* SoundClipInfo.hpp */,
 				6A2F8D4670566BD9D3EFA5EE /* goodies.cpp */,
 				21EC8C45F76725E25BB6F44E /* goodies.h */,
+				A2540AA81EDB2E7100C54BD1 /* render */,
+				A2937DE11ED8825C000EBBF6 /* constants.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -294,12 +329,17 @@
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				60510147EAEDE5F9E74AD881 /* goodies.cpp in Sources */,
 				AEA91FDE87726B5E77672BDE /* fft.cpp in Sources */,
+				A2540AA71EDB1CE100C54BD1 /* SoundClipInfo.cpp in Sources */,
 				A353D59D159269DB8C6E6DB3 /* maxiAtoms.cpp in Sources */,
 				4F769DF214320AEBB80D169E /* maxiBark.cpp in Sources */,
 				D0AA39721278B2230D47FAAC /* maxiFFT.cpp in Sources */,
+				A2540AA41EDA38B400C54BD1 /* MetaInfoPanel.cpp in Sources */,
 				D0FCC3145B36529E5251A015 /* maxiGrains.cpp in Sources */,
 				8358FAE532EF67E98365AEB4 /* maxiMFCC.cpp in Sources */,
+				A2540AAB1EDB2F6100C54BD1 /* PositionIndicator.cpp in Sources */,
+				A2937DE01ED8808D000EBBF6 /* WavePlotter.cpp in Sources */,
 				9BA0D29EF609758744F00F2A /* maximilian.cpp in Sources */,
+				A2540AAE1EDB367D00C54BD1 /* DeltaHistoryPlotter.cpp in Sources */,
 				DDDB46DF57C41CD3338653C9 /* stb_vorbis.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

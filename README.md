@@ -1,10 +1,10 @@
-# requirements
+[openframework](http://openframeworks.cc/) version
+uses [ofxMaxim from Maximilian](https://github.com/micknoise/Maximilian) addon
 
-based on [openframeworks](http://openframeworks.cc/)
+# how to run
 
-this uses [ofxMaxim from Maximilian](https://github.com/micknoise/Maximilian) 
+  1. clone Maximilian
 
-1. clone Maximilian
   2. ```ln -s ofdir/addons/  maximilian/repo/dir/openframeworks/ofxMaxim```
-
+  3. put the sound clip inside ```bin/data/soundClips```
 
