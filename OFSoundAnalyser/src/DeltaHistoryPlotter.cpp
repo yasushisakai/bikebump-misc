@@ -25,7 +25,7 @@ void DeltaHistoryPlotter::pushDelta (const float& _positionParameter, const floa
     
     if (averageCount == nAverage - 1) {
         
-        /* average
+        /* average */
         float tempAverage{ 0.0f };
         // get last nAverage values
         std::for_each(deltaValues.end() - nAverage, deltaValues.end(), [&] (float _num) {
@@ -35,7 +35,8 @@ void DeltaHistoryPlotter::pushDelta (const float& _positionParameter, const floa
         tempAverage /= (float) nAverage;
         
         float y = ofMap(tempAverage, maxDelta, 0.0f, 0.0f, fbo.getHeight());
-        */
+        
+        averagePoints.push_back(ofPoint{x, y});
         
         /* max */
         float maxValue{ 0.0f };
@@ -43,11 +44,11 @@ void DeltaHistoryPlotter::pushDelta (const float& _positionParameter, const floa
             maxValue = MAX(maxValue, _num);
         });
         
-        float y = ofMap(maxValue, maxDelta, 0.0f, 0.0f, fbo.getHeight());
+        y = ofMap(maxValue, maxDelta, 0.0f, 0.0f, fbo.getHeight());
         
         isAbove = maxValue > threshold;
         
-        averagePoints.push_back(ofPoint{x, y});
+        maxPoints.push_back(ofPoint{x, y});
     }
 
 }
@@ -65,6 +66,7 @@ void DeltaHistoryPlotter::update(const float& _positionParameter, const float& _
     ofDrawLine(x, 0, x, fbo.getHeight());
     string delta = ofToString(deltaValues.back());
     ofDrawBitmapString(delta, x + 10, fbo.getHeight() * 0.5);
+    ofPolyline(maxPoints).draw();
     ofPolyline(averagePoints).draw();
     
     fbo.end();

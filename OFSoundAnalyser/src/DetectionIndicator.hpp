@@ -17,11 +17,13 @@
 #include "SoundClipInfo.hpp"
 
 class DetectionIndicator {
+    
     ofFbo fbo;
-    std::vector<vector<float>> detectRanges;
-    bool isAboveThreshold{false};
+    std::vector<vector<float>> waitingRanges;
+    std::vector<vector<float>> leavingRanges;
     float lastDetectionStart;
     std::shared_ptr<SoundClipInfo> info;
+    DetectionStates status;
     
     void drawBar (const float & start, const float & end) const;
     

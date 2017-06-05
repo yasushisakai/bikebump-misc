@@ -42,4 +42,10 @@ public:
     inline bool doesNeedToReset () const { return position >= length; };
 };
 
+enum DetectionStates: uint8_t {
+    INITIAL = 0,
+    WAITING,
+    LEAVING,
+};
+
 #endif /* SoundMetaInfo_hpp */

@@ -53,6 +53,13 @@ public:
     int targetScopeRangeCenter;
     // the radius of the targetScope;
     // it will find the strongest band between targetScopeRangeCenter +- targetScopeRange;
+    
+    /*
+     states:
+        0 : no detection
+        1 : over threshold, pending
+        2 : over threshold, met certain duration
+     */
 
     bool isAboveThreshold;
     float tempCursor;

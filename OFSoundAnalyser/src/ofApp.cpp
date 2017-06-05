@@ -1,6 +1,5 @@
 #include "ofApp.h"
 
-using namespace Goodies;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -12,12 +11,12 @@ void ofApp::setup(){
     fft.setup(bufferSize, 512, 256);
     magnitudes = fft.magnitudes; // fft.magsToDB();
     maxIndex = -1;
-    needsRecord = false;
+    needsRecord = true;
     averageMagnitudes = vector<float>(bufferSize, 0.0f);
     
-    lowClampIndex = getIndexFromFreq(lowClampFreq, soundInfoPtr -> sampleRate);
-    highClampIndex = getIndexFromFreq(highClampFreq, soundInfoPtr -> sampleRate);
-    targetScopeRangeCenter = getIndexFromFreq(targetScopeRangeCenterFreq, soundInfoPtr -> sampleRate);
+    lowClampIndex = Goodies::getIndexFromFreq(lowClampFreq, soundInfoPtr -> sampleRate);
+    highClampIndex = Goodies::getIndexFromFreq(highClampFreq, soundInfoPtr -> sampleRate);
+    targetScopeRangeCenter = Goodies::getIndexFromFreq(targetScopeRangeCenterFreq, soundInfoPtr -> sampleRate);
     isAboveThreshold = false;
     thresholdRanges  = vector<vector<float>>(0, vector<float>(2));
     
@@ -33,7 +32,6 @@ void ofApp::setup(){
     leftDeltaPlotter = DeltaHistoryPlotter{ innerWidth, 100 };
     rightDeltaPlotter = DeltaHistoryPlotter{ innerWidth, 100 };
     detectionIndicator = DetectionIndicator{ soundInfoPtr, innerWidth, 50 };
-    // detectionVisualizer.allocate(innerWidth, 25, GL_RGB);
     
     // clear folder and make dir
     auto saveDir = ofDirectory{ "/out/" + filename };
@@ -67,46 +65,15 @@ void ofApp::update(){
     
     detectionIndicator.update(leftDeltaPlotter.isAbove, rightDeltaPlotter.isAbove);
     
-    /*
-    detectionVisualizer.begin();
-    ofClear(white);
-    
-    for (int i = 0; i < thresholdRanges.size(); i++) {
-        ofSetColor(black);
-        float sx = thresholdRanges[i][0] * detectionVisualizer.getWidth();
-        float positionDelta = thresholdRanges[i][1] - thresholdRanges[i][0];
-        float dx = positionDelta * detectionVisualizer.getWidth();
-        ofDrawRectangle(sx, 0, dx, detectionVisualizer.getHeight());
-        ofSetColor(white);
-        string duration = ofToString(positionDelta * soundInfo.msLength) + "ms";
-        ofDrawBitmapString(duration,
-                           sx + dx * 0.5 - getBitMapStringWidth(duration) * 0.5,
-                           (detectionVisualizer.getHeight() + bitmapStringHeight) * 0.5
-                           );
-    }
-    
-    ofSetColor(black);
-    
-    if( isAboveThreshold ) {
-        float sx = tempCursor * detectionVisualizer.getWidth();
-        float positionDelta = soundInfo.positionParameter - tempCursor;
-        float dx = positionDelta * detectionVisualizer.getWidth();
-        ofDrawRectangle(sx, 0, dx, detectionVisualizer.getHeight());
-        string duration = ofToString(positionDelta * soundInfo.msLength) + "ms";
-        ofDrawBitmapString(duration,
-                           soundInfo.positionParameter * detectionVisualizer.getWidth() + 20,
-                           (detectionVisualizer.getHeight() + bitmapStringHeight) * 0.5
-                           );
-    }
-    detectionVisualizer.end();
-    */
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     
     // everytime fft.process is true
-    if (!needsRecord) return;
+    if (record) {
+        if (!needsRecord) return;
+    }
     
     ofClear(background);
     
@@ -127,9 +94,11 @@ void ofApp::draw(){
     wavePlotter.draw();
     ofPopMatrix();
     
-    ofSaveScreen("out/" + filename + "/" + filename + "_" + zeroPad(soundInfoPtr -> positionMS, 5) + ".png");
+    ofSaveScreen("out/" + filename + "/" + filename + "_" + Goodies::zeroPad(soundInfoPtr -> positionMS, 5) + ".png");
     
-    needsRecord = false;
+    if (record) {
+        needsRecord = false;
+    }
 }
 
 //--------------------------------------------------------------
@@ -188,13 +157,16 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
     
-    if(needsRecord) return;
+    if(record) {
+        if(needsRecord) return;
+    }
     
     for (int i = 0; i < bufferSize; i++) {
         double sound = soundClip.play();
         soundInfoPtr -> incrementPosition();
         if(soundInfoPtr -> doesNeedToReset() ) {
             soundInfoPtr -> position = 0;
+            // write to out.csv
             ofExit();
         }
         
@@ -202,7 +174,9 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
             
             // this will stop this thread
             // wait untill re-render
-            needsRecord = true;
+            if (record) {
+                needsRecord = true;
+            }
 
             magnitudes = fft.magnitudes; //fft.magsToDB();
             float magMax = 1;
@@ -229,11 +203,10 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
             
 
         }
-        
-        /* don't wanna hear
-         output[i * nChannels] = sound;
-         output[i * nChannels + 1] = sound;
-         */
+        if (!record) {
+            output[i * nChannels] = sound;
+            output[i * nChannels + 1] = sound;
+        }
         
     }
 }

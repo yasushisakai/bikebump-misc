@@ -20,6 +20,7 @@ class DeltaHistoryPlotter {
 
     std::vector<ofPoint> points;
     
+    std::vector<ofPoint> maxPoints;
     std::vector<ofPoint> averagePoints;
     
     constexpr static float maxDelta { 50.0f };
