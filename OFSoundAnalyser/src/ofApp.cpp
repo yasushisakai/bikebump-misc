@@ -7,7 +7,7 @@ void ofApp::setup(){
     
     soundClip.load(ofToDataPath("soundClips/" + filename));
     
-    soundInfo = SoundClipInfo::SoundClipInfo(filename, soundClip.getLength(), soundClip.getSummary());
+    soundInfoPtr = std::make_shared<SoundClipInfo>(SoundClipInfo(filename, soundClip.getLength(), soundClip.getSummary()));
     
     fft.setup(bufferSize, 512, 256);
     magnitudes = fft.magnitudes; // fft.magsToDB();
@@ -15,24 +15,25 @@ void ofApp::setup(){
     needsRecord = false;
     averageMagnitudes = vector<float>(bufferSize, 0.0f);
     
-    lowClampIndex = getIndexFromFreq(lowClampFreq, soundInfo.sampleRate);
-    highClampIndex = getIndexFromFreq(highClampFreq, soundInfo.sampleRate);
-    targetScopeRangeCenter = getIndexFromFreq(targetScopeRangeCenterFreq, soundInfo.sampleRate);
+    lowClampIndex = getIndexFromFreq(lowClampFreq, soundInfoPtr -> sampleRate);
+    highClampIndex = getIndexFromFreq(highClampFreq, soundInfoPtr -> sampleRate);
+    targetScopeRangeCenter = getIndexFromFreq(targetScopeRangeCenterFreq, soundInfoPtr -> sampleRate);
     isAboveThreshold = false;
     thresholdRanges  = vector<vector<float>>(0, vector<float>(2));
     
-    ofSoundStreamSetup(2, 2, this, soundInfo.sampleRate, bufferSize, 4);
+    ofSoundStreamSetup(2, 2, this, soundInfoPtr -> sampleRate, bufferSize, 4);
     
     auto innerWidth = ofGetWidth() - margin * 2;
     
     // I want to refresh only if new fft.process is true
     ofSetBackgroundAuto(false);
-    metaInfoPanel = MetaInfoPanel{ innerWidth, 50 };
-    wavePlotter = WavePlotter{ soundInfo, innerWidth, 202, lowClampIndex, highClampIndex, targetScopeRangeCenter };
+    metaInfoPanel = MetaInfoPanel{ soundInfoPtr, innerWidth, 50 };
+    wavePlotter = WavePlotter{ soundInfoPtr, innerWidth, 202, lowClampIndex, highClampIndex, targetScopeRangeCenter };
     positionIndicator = PositionIndicator{ innerWidth, 50 };
     leftDeltaPlotter = DeltaHistoryPlotter{ innerWidth, 100 };
     rightDeltaPlotter = DeltaHistoryPlotter{ innerWidth, 100 };
-    detectionVisualizer.allocate(innerWidth, 25, GL_RGB);
+    detectionIndicator = DetectionIndicator{ soundInfoPtr, innerWidth, 50 };
+    // detectionVisualizer.allocate(innerWidth, 25, GL_RGB);
     
     // clear folder and make dir
     auto saveDir = ofDirectory{ "/out/" + filename };
@@ -48,24 +49,25 @@ void ofApp::update(){
     
     if (!needsRecord) return;
     
-    soundInfo.update();
-    metaInfoPanel.update(soundInfo);
+    soundInfoPtr -> update();
+    
+    metaInfoPanel.update();
     wavePlotter.update(magnitudes);
-    positionIndicator.update(soundInfo.positionParameter);
+    positionIndicator.update(soundInfoPtr -> positionParameter);
     
     int targetScopeIndex = wavePlotter.getTargetScopeIndex();
     
     float deltaLeft = MAX(magnitudes[targetScopeIndex] - magnitudes[targetScopeIndex  - neighborCells], 0.0);
     float deltaRight = MAX(magnitudes[targetScopeIndex] - magnitudes[targetScopeIndex + neighborCells], 0.0);
     
-    // TODO: make it cleaner
-    leftDeltaPlotter.pushDelta(soundInfo.positionParameter, deltaLeft);
-    leftDeltaPlotter.update();
-    rightDeltaPlotter.pushDelta(soundInfo.positionParameter, deltaRight);
-    rightDeltaPlotter.update();
+    leftDeltaPlotter.update(soundInfoPtr -> positionParameter, deltaLeft);
+    rightDeltaPlotter.update(soundInfoPtr -> positionParameter, deltaRight);
     
     DeltaHistoryPlotter::updateAverageCount();
     
+    detectionIndicator.update(leftDeltaPlotter.isAbove, rightDeltaPlotter.isAbove);
+    
+    /*
     detectionVisualizer.begin();
     ofClear(white);
     
@@ -97,6 +99,7 @@ void ofApp::update(){
                            );
     }
     detectionVisualizer.end();
+    */
 }
 
 //--------------------------------------------------------------
@@ -117,11 +120,14 @@ void ofApp::draw(){
     ofTranslate(0, margin);
     rightDeltaPlotter.draw();
     ofTranslate(0, margin);
-    detectionVisualizer.draw(0, 0);
+    detectionIndicator.draw();
+    ofTranslate(0, margin);
+    
+    // detectionVisualizer.draw(0, 0);
     wavePlotter.draw();
     ofPopMatrix();
     
-    ofSaveScreen("out/" + filename + "/" + filename + "_" + zeroPad(soundInfo.positionMS, 5) + ".png");
+    ofSaveScreen("out/" + filename + "/" + filename + "_" + zeroPad(soundInfoPtr -> positionMS, 5) + ".png");
     
     needsRecord = false;
 }
@@ -186,11 +192,9 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
     
     for (int i = 0; i < bufferSize; i++) {
         double sound = soundClip.play();
-        soundInfo.position ++;
-        if(soundInfo.position >= soundInfo.length) {
-            soundInfo.position = 0;
-            leftDeltaPoints.clear();
-            rightDeltaPoints.clear();
+        soundInfoPtr -> incrementPosition();
+        if(soundInfoPtr -> doesNeedToReset() ) {
+            soundInfoPtr -> position = 0;
             ofExit();
         }
         

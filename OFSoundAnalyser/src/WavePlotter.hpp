@@ -10,6 +10,7 @@
 #define WavePlotter_hpp
 
 #include <stdio.h>
+#include <memory>
 #include "ofMain.h"
 #include "constants.h"
 #include "goodies.h"
@@ -20,7 +21,7 @@ public:
     WavePlotter() = default;
     
     WavePlotter(
-                const SoundClipInfo & _info,
+                const std::shared_ptr<SoundClipInfo> & _info,
                 const int & _width,
                 const int & _height,
                 const int & _lowIndex,
@@ -36,7 +37,7 @@ public:
 private:
 
     ofFbo fbo;
-    SoundClipInfo info;
+    std::shared_ptr<SoundClipInfo> info;
     int lowIndex, highIndex, indicesBetween;
     constexpr static float maxMagnitude { 100.0f };
     int targetRangeCenter, targetRangeRadius;

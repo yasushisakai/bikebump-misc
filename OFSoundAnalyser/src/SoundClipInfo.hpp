@@ -38,7 +38,8 @@ public:
     
     void update ();
     
-    inline void updatePosition () { position++;};
+    inline void incrementPosition () { position++; };
+    inline bool doesNeedToReset () const { return position >= length; };
 };
 
 #endif /* SoundMetaInfo_hpp */

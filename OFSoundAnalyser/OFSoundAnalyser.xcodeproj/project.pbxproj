@@ -11,6 +11,7 @@
 		60510147EAEDE5F9E74AD881 /* goodies.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F8D4670566BD9D3EFA5EE /* goodies.cpp */; };
 		8358FAE532EF67E98365AEB4 /* maxiMFCC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BCF14FC367169259ACDF9BA /* maxiMFCC.cpp */; };
 		9BA0D29EF609758744F00F2A /* maximilian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A78AB13B42ED9A52919755E /* maximilian.cpp */; };
+		A22C13851EE42CF400EC92DC /* DetectionIndicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A22C13831EE42CF400EC92DC /* DetectionIndicator.cpp */; };
 		A2540AA41EDA38B400C54BD1 /* MetaInfoPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2540AA21EDA38B400C54BD1 /* MetaInfoPanel.cpp */; };
 		A2540AA71EDB1CE100C54BD1 /* SoundClipInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2540AA51EDB1CE100C54BD1 /* SoundClipInfo.cpp */; };
 		A2540AAB1EDB2F6100C54BD1 /* PositionIndicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2540AA91EDB2F6100C54BD1 /* PositionIndicator.cpp */; };
@@ -72,6 +73,8 @@
 		6A2F8D4670566BD9D3EFA5EE /* goodies.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = goodies.cpp; path = src/goodies.cpp; sourceTree = SOURCE_ROOT; };
 		7A78AB13B42ED9A52919755E /* maximilian.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = maximilian.cpp; path = ../../../../openframeworks_098/addons/ofxMaxim/libs/maximilian.cpp; sourceTree = SOURCE_ROOT; };
 		7D036AAADD555641DBA2F62A /* maxiGrains.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = maxiGrains.h; path = ../../../../openframeworks_098/addons/ofxMaxim/libs/maxiGrains.h; sourceTree = SOURCE_ROOT; };
+		A22C13831EE42CF400EC92DC /* DetectionIndicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DetectionIndicator.cpp; sourceTree = "<group>"; };
+		A22C13841EE42CF400EC92DC /* DetectionIndicator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DetectionIndicator.hpp; sourceTree = "<group>"; };
 		A2540AA21EDA38B400C54BD1 /* MetaInfoPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MetaInfoPanel.cpp; sourceTree = "<group>"; };
 		A2540AA31EDA38B400C54BD1 /* MetaInfoPanel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MetaInfoPanel.hpp; sourceTree = "<group>"; };
 		A2540AA51EDB1CE100C54BD1 /* SoundClipInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundClipInfo.cpp; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				A2540AAA1EDB2F6100C54BD1 /* PositionIndicator.hpp */,
 				A2540AAC1EDB367D00C54BD1 /* DeltaHistoryPlotter.cpp */,
 				A2540AAD1EDB367D00C54BD1 /* DeltaHistoryPlotter.hpp */,
+				A22C13831EE42CF400EC92DC /* DetectionIndicator.cpp */,
+				A22C13841EE42CF400EC92DC /* DetectionIndicator.hpp */,
 			);
 			name = render;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 				D0FCC3145B36529E5251A015 /* maxiGrains.cpp in Sources */,
 				8358FAE532EF67E98365AEB4 /* maxiMFCC.cpp in Sources */,
 				A2540AAB1EDB2F6100C54BD1 /* PositionIndicator.cpp in Sources */,
+				A22C13851EE42CF400EC92DC /* DetectionIndicator.cpp in Sources */,
 				A2937DE01ED8808D000EBBF6 /* WavePlotter.cpp in Sources */,
 				9BA0D29EF609758744F00F2A /* maximilian.cpp in Sources */,
 				A2540AAE1EDB367D00C54BD1 /* DeltaHistoryPlotter.cpp in Sources */,

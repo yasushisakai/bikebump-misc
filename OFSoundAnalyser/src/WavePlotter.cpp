@@ -9,7 +9,7 @@
 #include "WavePlotter.hpp"
 
 WavePlotter::WavePlotter(
-            const SoundClipInfo & _info,
+            const std::shared_ptr<SoundClipInfo> & _info,
             const int & _width,
             const int & _height,
             const int & _lowIndex,
@@ -71,7 +71,7 @@ void WavePlotter::update (float* magnitudes) {
     ofSetLineWidth(2.0f);
     ofPolyline(slopePoints).draw();
     
-    float frequency = Goodies::getFreqFromIndex(targetScopeIndex, info.sampleRate);
+    float frequency = Goodies::getFreqFromIndex(targetScopeIndex, info -> sampleRate);
    
     int freqWidth = Goodies::getBitMapStringWidth(ofToString(frequency));
     float x = ofMap(targetScopeIndex, lowIndex, highIndex, 0, fbo.getWidth());

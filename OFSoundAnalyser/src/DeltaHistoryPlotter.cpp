@@ -11,6 +11,7 @@
 unsigned short DeltaHistoryPlotter::averageCount{ 0 };
 
 DeltaHistoryPlotter::DeltaHistoryPlotter (const int& _width, const int& _height) {
+    isAbove = false;
     fbo.allocate(_width, _height, GL_RGB);
 }
 
@@ -44,13 +45,17 @@ void DeltaHistoryPlotter::pushDelta (const float& _positionParameter, const floa
         
         float y = ofMap(maxValue, maxDelta, 0.0f, 0.0f, fbo.getHeight());
         
+        isAbove = maxValue > threshold;
         
         averagePoints.push_back(ofPoint{x, y});
     }
 
 }
 
-void DeltaHistoryPlotter::update() {
+void DeltaHistoryPlotter::update(const float& _positionParameter, const float& _deltaValue) {
+    
+    pushDelta(_positionParameter, _deltaValue);
+    
     fbo.begin();
     
     ofClear(white);

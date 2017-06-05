@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "ofMain.h"
 #include "ofxMaxim.h"
 #include "constants.h"
@@ -9,6 +10,7 @@
 #include "PositionIndicator.hpp"
 #include "DeltaHistoryPlotter.hpp"
 #include "WavePlotter.hpp"
+#include "DetectionIndicator.hpp"
 
 
 class ofApp : public ofBaseApp{
@@ -35,7 +37,7 @@ public:
 
     
     maxiSample soundClip;
-    SoundClipInfo soundInfo;
+    std::shared_ptr<SoundClipInfo> soundInfoPtr;
     int msFromStart;
     double outputs[2];
 
@@ -61,9 +63,5 @@ public:
     WavePlotter wavePlotter;
     PositionIndicator positionIndicator;
     DeltaHistoryPlotter leftDeltaPlotter, rightDeltaPlotter;
-    ofFbo detectionVisualizer;
-    vector<ofPoint> leftDeltaPoints;
-    vector<ofPoint> leftDeltaAveragePoints;
-    vector<ofPoint> rightDeltaPoints;
-    vector<ofPoint> rightDeltaAveragePoints;
+    DetectionIndicator detectionIndicator;
 };

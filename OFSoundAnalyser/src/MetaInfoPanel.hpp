@@ -10,6 +10,7 @@
 #define MetaInfoPanel_hpp
 
 #include <stdio.h>
+#include <memory>
 #include "ofMain.h"
 #include "SoundClipInfo.hpp"
 #include "constants.h"
@@ -17,13 +18,15 @@
 
 class MetaInfoPanel {
     ofFbo fbo;
-    SoundClipInfo info;
+    std::shared_ptr<SoundClipInfo> info;
 public:
     
     MetaInfoPanel() = default;
-    MetaInfoPanel(const int&, const int&);
+    inline MetaInfoPanel(const std::shared_ptr<SoundClipInfo> & _info, const int& _width, const int& _height): info{_info} {
+        fbo.allocate(_width, _height, GL_RGB);
+    };
 
-    void update(const SoundClipInfo& info);
+    void update() const;
     
     inline void draw() { fbo.draw(0, 0); ofTranslate(0, fbo.getHeight()); };
     
