@@ -34,7 +34,11 @@ public:
     
     void audioOut (float * output, int bufferSize, int nChannels);
     int convertPositionToMS (const int & positiond);
-
+    void initializeSoundClip(const string & fileName);
+    void initializeRenderComponents (const std::shared_ptr<SoundClipInfo> & soundInfoPtr);
+    
+    uint8_t fileCount{0};
+    string filename;
     
     maxiSample soundClip;
     std::shared_ptr<SoundClipInfo> soundInfoPtr;
@@ -43,8 +47,6 @@ public:
 
     ofxMaxiFFT fft;
     float * magnitudes;
-    vector<float> averageMagnitudes;
-    int averageCount { 0 };
 
     int maxIndex;
     bool needsRecord; // triggers everytime when fft occurs
@@ -54,17 +56,7 @@ public:
     // the radius of the targetScope;
     // it will find the strongest band between targetScopeRangeCenter +- targetScopeRange;
     
-    /*
-     states:
-        0 : no detection
-        1 : over threshold, pending
-        2 : over threshold, met certain duration
-     */
-
-    bool isAboveThreshold;
-    float tempCursor;
-    vector<vector<float>> thresholdRanges;
-    
+    int innerWidth;
     
     MetaInfoPanel metaInfoPanel;
     WavePlotter wavePlotter;

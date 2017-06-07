@@ -9,6 +9,7 @@
 #ifndef constants_h
 #define constants_h
 
+#include <cstdint>
 #include "ofMain.h"
 
 //
@@ -22,7 +23,7 @@ const bool record{true};
 // single ding
 // const string filename { "testRecord_1495803068741.wav" };
 // double ding
-const string filename { "testRecord_1495803102954.wav" };
+// const string filename { "testRecord_1495803102954.wav" };
 // single bronze ding
 // const string filename { "testRecord_1495803131775.wav" };
 // double bronze ding
@@ -35,9 +36,9 @@ const float targetScopeRangeCenterFreq { 2414 };
 const float lowClampFreq { 1500 };
 const float highClampFreq { 4000 };
 
-const int targetScopeRange{ 2 };
+const uint8_t targetScopeRange{ 2 };
 // the radius where to compare in order to get the slope
-const int neighborCells { 2 }; // focus range
+const uint8_t neighborCells { 2 }; // focus range
 const float threshold { 8.0f };
 const int thresholdLength { 100 };
 

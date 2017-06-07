@@ -44,8 +44,8 @@ public:
 
 enum DetectionStates: uint8_t {
     INITIAL = 0,
-    WAITING,
-    LEAVING,
+    WAITING,  // after detecting the threshold, it waits for a period to verify the ding
+    LEAVING,  // is untill it vanishes
 };
 
 #endif /* SoundMetaInfo_hpp */

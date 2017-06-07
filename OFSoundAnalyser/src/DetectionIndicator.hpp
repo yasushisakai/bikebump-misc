@@ -35,6 +35,10 @@ public:
     void update (const bool & _isLeftAbove, const bool & _isRightAbove) ;
     inline void draw () const { fbo.draw(0, 0); ofTranslate(0, fbo.getHeight()); };
     
+    inline std::vector<vector<float>> getWaitingRanges () const {
+        return waitingRanges;
+    }
+    
 };
 
 #endif /* DetectionIndicator_hpp */
