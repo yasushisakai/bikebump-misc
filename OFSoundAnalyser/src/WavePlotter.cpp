@@ -8,20 +8,6 @@
 
 #include "WavePlotter.hpp"
 
-WavePlotter::WavePlotter(
-            const std::shared_ptr<SoundClipInfo> & _info,
-            const int & _width,
-            const int & _height,
-            const int & _lowIndex,
-            const int & _hightIndex,
-            const int & _targetRangeCenter
-            ) : info{_info}, lowIndex{_lowIndex},
-highIndex{_hightIndex}, indicesBetween{_hightIndex - _lowIndex}, targetRangeCenter{_targetRangeCenter}
-{
-    fbo.allocate(_width, _height, GL_RGB);
-    targetRangeRadius = targetScopeRange;
-    slopeNeighbors = neighborCells;
-}
 
 void WavePlotter::update (float* magnitudes) {
     fbo.begin();
@@ -60,8 +46,8 @@ void WavePlotter::update (float* magnitudes) {
     ofSetColor(black);
     
     for (int i = 0; i < 3; i++) {
-        float x = ofMap(targetScopeIndex + (i - 1) * slopeNeighbors, lowIndex, highIndex, 0.0f, fbo.getWidth());
-        float y = ofMap(magnitudes[targetScopeIndex + (i - 1) * slopeNeighbors], maxMagnitude, 0.0f, 0.0f, fbo.getHeight() - 2);
+        float x = ofMap(targetScopeIndex + (i - 1) * WavePlotter::slopeNeighbors, lowIndex, highIndex, 0.0f, fbo.getWidth());
+        float y = ofMap(magnitudes[targetScopeIndex + (i - 1) * WavePlotter::slopeNeighbors], maxMagnitude, 0.0f, 0.0f, fbo.getHeight() - 2);
         
         ofPoint point = ofPoint(x, y);
         Goodies::drawCrossmark(point, 7);

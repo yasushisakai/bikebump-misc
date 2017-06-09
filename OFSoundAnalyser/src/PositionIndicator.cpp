@@ -8,7 +8,7 @@
 
 #include "PositionIndicator.hpp"
 
-void PositionIndicator::update (const float & positionParameter) {
+void PositionIndicator::update () const {
     fbo.begin();
     ofClear(white);
     ofSetColor(black);
@@ -17,7 +17,7 @@ void PositionIndicator::update (const float & positionParameter) {
                fbo.getWidth(),
                fbo.getHeight() * 0.5);
     
-    ofDrawCircle(fbo.getWidth() * positionParameter,
+    ofDrawCircle(fbo.getWidth() * info -> positionParameter,
                  fbo.getHeight() * 0.5,
                  3);
     fbo.end();

@@ -17,7 +17,7 @@ void MetaInfoPanel::update() const {
     
     ofPushMatrix();
     ofTranslate(0, Goodies::bitmapStringHeight);
-    string filenameInfo = "filename: " + filename;
+    string filenameInfo = "filename: " + info -> filename;
     ofDrawBitmapString(filenameInfo, 0, 0);
     ofTranslate(Goodies::getBitMapStringWidth(filenameInfo) + 20, 0);
     string msPosition = Goodies::zeroPad(info -> positionMS, 4) + "/" + Goodies::zeroPad((int)info ->msLength, 4);

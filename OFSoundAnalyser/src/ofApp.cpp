@@ -11,39 +11,28 @@ void ofApp::setup(){
     fft.setup(bufferSize, 512, 256);
     magnitudes = fft.magnitudes; // fft.magsToDB();
     
-    // get the list of sound clips
-    ofDirectory dir{ofToDataPath("soundClips")};
-    //only show png files
-    dir.allowExt("wav");
-    //populate the directory object
-    dir.listDir();
+    soundClipDir = ofDirectory{ofToDataPath("soundClips")};
+    soundClipDir.allowExt("wav");
+    soundClipDir.listDir();
     
-    for (uint8_t i = 0; i < dir.size(); i++) {
-        ofLogNotice("files", dir.getPath(i));
-    }
     
-    filename = dir.getName(0);
+    lowClampIndex = Goodies::getIndexFromFreq(lowClampFreq, sampleRate);
+    highClampIndex = Goodies::getIndexFromFreq(highClampFreq, sampleRate);
     
-    soundClip.load(ofToDataPath("soundClips/" + filename));
-    soundInfoPtr = std::make_shared<SoundClipInfo>(SoundClipInfo(filename, soundClip.getLength(), soundClip.getSummary()));
+    /* initializing rendering components */
+    metaInfoPanel = MetaInfoPanel{ innerWidth, 50 };
+    wavePlotter = WavePlotter{ innerWidth, 202, lowClampIndex, highClampIndex };
+    positionIndicator = PositionIndicator{ innerWidth, 50 };
+    leftDeltaPlotter = DeltaHistoryPlotter{ innerWidth, 100 };
+    rightDeltaPlotter = DeltaHistoryPlotter{ innerWidth, 100 };
+    detectionIndicator = DetectionIndicator{ innerWidth, 50 };
     
-    needsRecord = true;
-    
-    lowClampIndex = Goodies::getIndexFromFreq(lowClampFreq, soundInfoPtr -> sampleRate);
-    highClampIndex = Goodies::getIndexFromFreq(highClampFreq, soundInfoPtr -> sampleRate);
-    targetScopeRangeCenter = Goodies::getIndexFromFreq(targetScopeRangeCenterFreq, soundInfoPtr -> sampleRate);
+    initializeSoundClip();
     
     ofSoundStreamSetup(2, 2, this, soundInfoPtr -> sampleRate, bufferSize, 4);
     
-    initializeRenderComponents(soundInfoPtr);
+    changeFile(soundInfoPtr);
     
-    // clear folder and make dir
-    auto saveDir = ofDirectory{ "/out/" + filename };
-    if (saveDir.exists()) {
-        saveDir.remove(true);
-    }
-    
-    saveDir.create();
 }
 
 //--------------------------------------------------------------
@@ -55,15 +44,15 @@ void ofApp::update(){
     
     metaInfoPanel.update();
     wavePlotter.update(magnitudes);
-    positionIndicator.update(soundInfoPtr -> positionParameter);
+    positionIndicator.update();
     
     int targetScopeIndex = wavePlotter.getTargetScopeIndex();
     
-    float deltaLeft = MAX(magnitudes[targetScopeIndex] - magnitudes[targetScopeIndex - neighborCells], 0.0);
-    float deltaRight = MAX(magnitudes[targetScopeIndex] - magnitudes[targetScopeIndex + neighborCells], 0.0);
+    float deltaLeft = MAX(magnitudes[targetScopeIndex] - magnitudes[targetScopeIndex - WavePlotter::slopeNeighbors], 0.0);
+    float deltaRight = MAX(magnitudes[targetScopeIndex] - magnitudes[targetScopeIndex + WavePlotter::slopeNeighbors], 0.0);
     
-    leftDeltaPlotter.update(soundInfoPtr -> positionParameter, deltaLeft);
-    rightDeltaPlotter.update(soundInfoPtr -> positionParameter, deltaRight);
+    leftDeltaPlotter.update(deltaLeft);
+    rightDeltaPlotter.update(deltaRight);
     
     DeltaHistoryPlotter::updateAverageCount(); // incrementing static counter for delta plotter
     detectionIndicator.update(leftDeltaPlotter.isAbove, rightDeltaPlotter.isAbove);
@@ -97,7 +86,13 @@ void ofApp::draw(){
     wavePlotter.draw();
     ofPopMatrix();
     
-    ofSaveScreen("out/" + filename + "/" + filename + "_" + Goodies::zeroPad(soundInfoPtr -> positionMS, 5) + ".png");
+    ofSaveScreen(
+                 "out/" +
+                 soundInfoPtr -> filename + "/" +
+                 soundInfoPtr -> filename + "_" +
+                 Goodies::zeroPad(soundInfoPtr -> positionMS, 5) +
+                 ".png"
+                 );
     
     if (record) {
         needsRecord = false;
@@ -158,23 +153,32 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
     
 }
 
-void ofApp::initializeSoundClip( const string & fileName) {
+void ofApp::initializeSoundClip() {
     
-    // close any open sound stream
-    ofSoundStreamClose();
+    string filename = soundClipDir.getName(fileCount);
     
-    soundClip.load(ofToDataPath("soundClips/" + fileName));
+    soundClip.load(ofToDataPath("soundClips/" + filename));
+    soundInfoPtr = std::make_shared<SoundClipInfo> (SoundClipInfo(filename, soundClip.getLength(), soundClip.getSummary()));
     
+    needsRecord = true;
     
+    // clear folder and make dir
+    auto saveDir = ofDirectory{ "/out/" + filename };
+    if (saveDir.exists()) {
+        saveDir.remove(true);
+    }
+    
+    saveDir.create();
 }
 
-void ofApp::initializeRenderComponents (const std::shared_ptr<SoundClipInfo> & _soundInfoPtr) {
-   metaInfoPanel = MetaInfoPanel{ _soundInfoPtr, innerWidth, 50 };
-    wavePlotter = WavePlotter{ _soundInfoPtr, innerWidth, 202, lowClampIndex, highClampIndex, targetScopeRangeCenter };
-    positionIndicator = PositionIndicator{ innerWidth, 50 };
-    leftDeltaPlotter = DeltaHistoryPlotter{ innerWidth, 100 };
-    rightDeltaPlotter = DeltaHistoryPlotter{ innerWidth, 100 };
-    detectionIndicator = DetectionIndicator{ _soundInfoPtr, innerWidth, 50 };
+
+void ofApp::changeFile (const std::shared_ptr<SoundClipInfo> & newInfo) {
+    metaInfoPanel.changeFile(newInfo);
+    wavePlotter.changeFile(newInfo);
+    positionIndicator.changeFile(newInfo);
+    leftDeltaPlotter.changeFile(newInfo);
+    rightDeltaPlotter.changeFile(newInfo);
+    detectionIndicator.changeFile(newInfo);
 }
 
 void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
@@ -194,7 +198,7 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
             
             ofFile file;
             file.open(ofToDataPath(fileOut), ofFile::Append, false);
-            file << filename << ", " << soundInfoPtr -> msLength;
+            file << soundInfoPtr -> filename << ", " << soundInfoPtr -> msLength;
             
             for (auto range : waitingRanges) {
                 file << ", " << range[0];

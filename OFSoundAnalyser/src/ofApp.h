@@ -34,11 +34,12 @@ public:
     
     void audioOut (float * output, int bufferSize, int nChannels);
     int convertPositionToMS (const int & positiond);
-    void initializeSoundClip(const string & fileName);
-    void initializeRenderComponents (const std::shared_ptr<SoundClipInfo> & soundInfoPtr);
-    
+    void initializeSoundClip();
+    void changeFile (const std::shared_ptr<SoundClipInfo> & newInfo);
+   
+    ofDirectory soundClipDir;
     uint8_t fileCount{0};
-    string filename;
+    // string filename;
     
     maxiSample soundClip;
     std::shared_ptr<SoundClipInfo> soundInfoPtr;

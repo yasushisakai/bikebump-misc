@@ -10,11 +10,6 @@
 
 unsigned short DeltaHistoryPlotter::averageCount{ 0 };
 
-DeltaHistoryPlotter::DeltaHistoryPlotter (const int& _width, const int& _height) {
-    isAbove = false;
-    fbo.allocate(_width, _height, GL_RGB);
-}
-
 void DeltaHistoryPlotter::pushDelta (const float& _positionParameter, const float & _deltaValue) {
     deltaValues.push_back(_deltaValue);
     
@@ -53,9 +48,9 @@ void DeltaHistoryPlotter::pushDelta (const float& _positionParameter, const floa
 
 }
 
-void DeltaHistoryPlotter::update(const float& _positionParameter, const float& _deltaValue) {
+void DeltaHistoryPlotter::update(const float& _deltaValue) {
     
-    pushDelta(_positionParameter, _deltaValue);
+    pushDelta(info -> positionParameter, _deltaValue);
     
     fbo.begin();
     

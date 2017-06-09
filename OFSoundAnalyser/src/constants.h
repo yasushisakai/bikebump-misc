@@ -35,10 +35,8 @@ const float targetScopeRangeCenterFreq { 2414 };
 // const float targetScopeRangeCenterFreq { 3600 };
 const float lowClampFreq { 1500 };
 const float highClampFreq { 4000 };
+const float sampleRate { 48000 };
 
-const uint8_t targetScopeRange{ 2 };
-// the radius where to compare in order to get the slope
-const uint8_t neighborCells { 2 }; // focus range
 const float threshold { 8.0f };
 const int thresholdLength { 100 };
 

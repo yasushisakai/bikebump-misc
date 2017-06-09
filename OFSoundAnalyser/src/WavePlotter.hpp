@@ -20,19 +20,25 @@ class WavePlotter {
 public:
     WavePlotter() = default;
     
-    WavePlotter(
-                const std::shared_ptr<SoundClipInfo> & _info,
-                const int & _width,
-                const int & _height,
-                const int & _lowIndex,
-                const int & _hightIndex,
-                const int & _targetRangeCenter
-                );
+    WavePlotter( const int & _width, const int & _height, const int & _lowIndex, const int & _hightIndex):
+        lowIndex{ _lowIndex },
+        highIndex{ _hightIndex }
+    {
+        indicesBetween = highIndex - lowIndex;
+        fbo.allocate(_width, _height);
+    };
+    
+    inline void changeFile ( const std::shared_ptr<SoundClipInfo> & newSoundInfo) {
+        info = newSoundInfo;
+        targetRangeCenter = Goodies::getIndexFromFreq(info -> targetFrequency, info -> sampleRate);
+    };
    
     inline int getTargetScopeIndex () { return targetScopeIndex; };
     
     void update (float* magnitudes);
     void draw ();
+    
+    constexpr static int slopeNeighbors { 2 };
 
 private:
 
@@ -40,9 +46,9 @@ private:
     std::shared_ptr<SoundClipInfo> info;
     int lowIndex, highIndex, indicesBetween;
     constexpr static float maxMagnitude { 100.0f };
-    int targetRangeCenter, targetRangeRadius;
+    constexpr static int targetRangeRadius { 2 };
+    int targetRangeCenter;
     int targetScopeIndex;
-    int slopeNeighbors;
 
 };
 

@@ -9,17 +9,21 @@
 #ifndef DeltaHistoryPlotter_hpp
 #define DeltaHistoryPlotter_hpp
 
+#include <memory>
 #include <stdio.h>
 #include "ofMain.h"
 #include "constants.h"
+#include "SoundClipInfo.hpp"
 
 class DeltaHistoryPlotter {
     ofFbo fbo;
+    std::shared_ptr<SoundClipInfo> info;
+    
     float x{ 0.0f }; // current cursor
     std::vector<float> deltaValues;
 
+    // list of points to draw
     std::vector<ofPoint> points;
-    
     std::vector<ofPoint> maxPoints;
     std::vector<ofPoint> averagePoints;
     
@@ -30,11 +34,15 @@ class DeltaHistoryPlotter {
     
 public:
     DeltaHistoryPlotter() = default;
-    DeltaHistoryPlotter(const int& _width, const int& _height);
+    DeltaHistoryPlotter(const int& _width, const int& _height): isAbove{ false } {
+        fbo.allocate(_width, _height, GL_RGB);
+    };
+    
+    inline void changeFile (const std::shared_ptr<SoundClipInfo> & newInfo) { info = newInfo; };
 
-    void update (const float & _potionParamter, const float & _deltaValue);
+    void update (const float & _deltaValue);
     inline void draw () const { fbo.draw(0, 0); ofTranslate(0, fbo.getHeight()); };
-    inline void clearDeltaValues() { deltaValues.clear(); points.clear(); };
+    inline void clearDeltaValues() { fbo.clear(); deltaValues.clear(); points.clear(); };
     
     inline static void updateAverageCount () { averageCount = averageCount < nAverage ? averageCount + 1 : 0; };
     static unsigned short averageCount;

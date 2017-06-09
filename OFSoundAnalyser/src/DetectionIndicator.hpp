@@ -29,9 +29,11 @@ class DetectionIndicator {
     
     
 public:
-    DetectionIndicator () = default;
-    DetectionIndicator (const std::shared_ptr<SoundClipInfo> & info, const int & width, const int & height);
     
+    DetectionIndicator () = default;
+    DetectionIndicator (const int & width, const int & height);
+   
+    void changeFile (const std::shared_ptr<SoundClipInfo> newInfo) { info = newInfo; };
     void update (const bool & _isLeftAbove, const bool & _isRightAbove) ;
     inline void draw () const { fbo.draw(0, 0); ofTranslate(0, fbo.getHeight()); };
     

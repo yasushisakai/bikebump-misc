@@ -8,7 +8,7 @@
 
 #include "DetectionIndicator.hpp"
 
-DetectionIndicator::DetectionIndicator (const std::shared_ptr<SoundClipInfo> & _info, const int & _width, const int & _height): info{_info} {
+DetectionIndicator::DetectionIndicator (const int & _width, const int & _height) {
     waitingRanges = vector<vector<float>> (0, vector<float>(2));
     leavingRanges = vector<vector<float>> (0, vector<float>(2));
     fbo.allocate(_width, _height);

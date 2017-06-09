@@ -28,6 +28,8 @@ public:
     float duration;
     int msLength;
     
+    float targetFrequency;
+    
     long position {0};
     float positionParameter; // 0.0 - 1.0
     int positionMS;
