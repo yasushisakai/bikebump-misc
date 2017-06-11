@@ -18,29 +18,53 @@
 
 class DetectionIndicator {
     
+    void drawBar (const float & start, const float & end) const;
+
+    constexpr static float thresholdLengthMin{ 50.0f };
+    constexpr static float thresholdLengthMax{ 350.0f };
+    constexpr static float thresholdLengthInc{ 100.0f };
+
     ofFbo fbo;
+    std::shared_ptr<SoundClipInfo> info;
+    
     std::vector<vector<float>> waitingRanges;
     std::vector<vector<float>> leavingRanges;
     float lastDetectionStart;
-    std::shared_ptr<SoundClipInfo> info;
     DetectionStates status;
-    
-    void drawBar (const float & start, const float & end) const;
-    
     
 public:
     
     DetectionIndicator () = default;
-    DetectionIndicator (const int & width, const int & height);
+    DetectionIndicator (const int & width, const int & height): thresholdLength{thresholdLengthMin} {
+        fbo.allocate(width, height);
+    };
+    
+    bool incrementThresholdLength ();
    
-    void changeFile (const std::shared_ptr<SoundClipInfo> newInfo) { info = newInfo; };
-    void update (const bool & _isLeftAbove, const bool & _isRightAbove) ;
+    void changeFile (const std::shared_ptr<SoundClipInfo> newInfo) {
+        info = newInfo;
+    };
+    
+    inline void init () {
+        waitingRanges = vector<vector<float>> (0, vector<float>(2));
+        leavingRanges = vector<vector<float>> (0, vector<float>(2));
+        status = INITIAL;
+    };
+    void update (const bool & _isLeftAbove, const bool & _isRightAbove);
+    void closeLeaving ();
+    
     inline void draw () const { fbo.draw(0, 0); ofTranslate(0, fbo.getHeight()); };
     
     inline std::vector<vector<float>> getWaitingRanges () const {
         return waitingRanges;
     }
     
+    inline std::vector<vector<float>> getLeavingRanges () const {
+        return leavingRanges;
+        
+    }
+    
+    float thresholdLength{ thresholdLengthMin };
 };
 
 #endif /* DetectionIndicator_hpp */

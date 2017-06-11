@@ -14,7 +14,8 @@ void MetaInfoPanel::update() const {
     
     ofClear(white);
     ofSetColor(black);
-    
+   
+    // line 1
     ofPushMatrix();
     ofTranslate(0, Goodies::bitmapStringHeight);
     string filenameInfo = "filename: " + info -> filename;
@@ -26,8 +27,7 @@ void MetaInfoPanel::update() const {
     ofDrawBitmapString("(" + Goodies::zeroPad((int)info -> position, 5) + ")", 0, 0);
     ofPopMatrix();
     
-    // line --- break
-    
+    // line 2
     ofPushMatrix();
     ofTranslate(0, Goodies::bitmapStringHeight * 2.25);
     string channels = "channels: " + ofToString(info -> nChannels);

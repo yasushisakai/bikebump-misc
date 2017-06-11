@@ -16,31 +16,15 @@
 // global
 //
 
-const bool record{true};
+constexpr bool record{true};
 
-// string filename = "testRecording.wav";
-// const string filename { "single_ding_silver.wav" };
-// single ding
-// const string filename { "testRecord_1495803068741.wav" };
-// double ding
-// const string filename { "testRecord_1495803102954.wav" };
-// single bronze ding
-// const string filename { "testRecord_1495803131775.wav" };
-// double bronze ding
-// const string filename { "testRecord_1495804060159.wav" };
+constexpr int bufferSize { 1024 };
+constexpr float sampleRate { 48000 };
 
-const int bufferSize { 1024 };
+constexpr float lowClampFreq { 1500 };
+constexpr float highClampFreq { 4000 };
 
-const float targetScopeRangeCenterFreq { 2414 };
-// const float targetScopeRangeCenterFreq { 3600 };
-const float lowClampFreq { 1500 };
-const float highClampFreq { 4000 };
-const float sampleRate { 48000 };
-
-const float threshold { 8.0f };
-const int thresholdLength { 100 };
-
-const int nAverage { 10 };
+constexpr int nAverage { 10 };
 
 // out
 
@@ -50,7 +34,7 @@ const string fileOut = "out.csv";
 // layout
 //
 
-const int margin = 20;
+constexpr int margin = 20;
 
 //
 // colors
@@ -61,6 +45,5 @@ const ofColor background { ofColor(240) };
 const ofColor lightGray { ofColor(200) };
 const ofColor grey { ofColor(120) };
 const ofColor black { ofColor(10) };
-
 
 #endif /* constants_h */

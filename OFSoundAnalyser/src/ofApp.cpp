@@ -15,7 +15,6 @@ void ofApp::setup(){
     soundClipDir.allowExt("wav");
     soundClipDir.listDir();
     
-    
     lowClampIndex = Goodies::getIndexFromFreq(lowClampFreq, sampleRate);
     highClampIndex = Goodies::getIndexFromFreq(highClampFreq, sampleRate);
     
@@ -27,11 +26,9 @@ void ofApp::setup(){
     rightDeltaPlotter = DeltaHistoryPlotter{ innerWidth, 100 };
     detectionIndicator = DetectionIndicator{ innerWidth, 50 };
     
-    initializeSoundClip();
+    initializeSoundClip( fileCount );
     
     ofSoundStreamSetup(2, 2, this, soundInfoPtr -> sampleRate, bufferSize, 4);
-    
-    changeFile(soundInfoPtr);
     
 }
 
@@ -67,6 +64,7 @@ void ofApp::draw(){
         if (!needsRecord) return;
     }
     
+    
     ofClear(background);
     
     ofPushMatrix();
@@ -86,6 +84,7 @@ void ofApp::draw(){
     wavePlotter.draw();
     ofPopMatrix();
     
+    /*
     ofSaveScreen(
                  "out/" +
                  soundInfoPtr -> filename + "/" +
@@ -93,6 +92,7 @@ void ofApp::draw(){
                  Goodies::zeroPad(soundInfoPtr -> positionMS, 5) +
                  ".png"
                  );
+    */
     
     if (record) {
         needsRecord = false;
@@ -153,9 +153,9 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
     
 }
 
-void ofApp::initializeSoundClip() {
+void ofApp::initializeSoundClip(const int & _newFileCount) {
     
-    string filename = soundClipDir.getName(fileCount);
+    string filename = soundClipDir.getName(_newFileCount);
     
     soundClip.load(ofToDataPath("soundClips/" + filename));
     soundInfoPtr = std::make_shared<SoundClipInfo> (SoundClipInfo(filename, soundClip.getLength(), soundClip.getSummary()));
@@ -164,21 +164,25 @@ void ofApp::initializeSoundClip() {
     
     // clear folder and make dir
     auto saveDir = ofDirectory{ "/out/" + filename };
+    
     if (saveDir.exists()) {
         saveDir.remove(true);
     }
     
-    saveDir.create();
+    // saveDir.create(true); // permission denied
+    ofDirectory::createDirectory("out/" + filename);
+    
+    changeFile();
 }
 
 
-void ofApp::changeFile (const std::shared_ptr<SoundClipInfo> & newInfo) {
-    metaInfoPanel.changeFile(newInfo);
-    wavePlotter.changeFile(newInfo);
-    positionIndicator.changeFile(newInfo);
-    leftDeltaPlotter.changeFile(newInfo);
-    rightDeltaPlotter.changeFile(newInfo);
-    detectionIndicator.changeFile(newInfo);
+void ofApp::changeFile () {
+    metaInfoPanel.changeFile(soundInfoPtr);
+    wavePlotter.changeFile(soundInfoPtr);
+    positionIndicator.changeFile(soundInfoPtr);
+    leftDeltaPlotter.changeFile(soundInfoPtr);
+    rightDeltaPlotter.changeFile(soundInfoPtr);
+    detectionIndicator.changeFile(soundInfoPtr);
 }
 
 void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
@@ -194,20 +198,46 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
             soundInfoPtr -> position = 0;
             // write to out.csv
             
+            detectionIndicator.closeLeaving();
+            
             vector<vector<float>> waitingRanges{ detectionIndicator.getWaitingRanges() };
+            vector<vector<float>> leavingRanges{ detectionIndicator.getLeavingRanges() };
             
             ofFile file;
             file.open(ofToDataPath(fileOut), ofFile::Append, false);
             file << soundInfoPtr -> filename << ", " << soundInfoPtr -> msLength;
-            
+            file << ", " << DeltaHistoryPlotter::threshold << ", " << detectionIndicator.thresholdLength;
+           
+            file << ", waiting";
             for (auto range : waitingRanges) {
-                file << ", " << range[0];
+                file << ", " << range[0] << ", " << range[1];
             }
-            
+
+            file << ", leaving";
+            for (auto range : leavingRanges) {
+              file << ", " << range[0] << ", " << range[1];
+            }
+
             file << endl;
             
             file.close();
-            ofExit();
+           
+            leftDeltaPlotter.init();
+            rightDeltaPlotter.init();
+            detectionIndicator.init();
+            
+            if (DeltaHistoryPlotter::incrementThreshold()) {
+                ofLogNotice("incrementThreshold capped");
+                if (detectionIndicator.incrementThresholdLength()) {
+                    ofLogNotice("increment Threshold Length capped");
+                    fileCount ++;
+                    if (fileCount < soundClipDir.size()) {
+                        initializeSoundClip(fileCount);
+                    } else {
+                        ofExit();
+                    }
+                }
+            }
         }
         
         if (fft.process(sound)) {

@@ -34,8 +34,8 @@ public:
     
     void audioOut (float * output, int bufferSize, int nChannels);
     int convertPositionToMS (const int & positiond);
-    void initializeSoundClip();
-    void changeFile (const std::shared_ptr<SoundClipInfo> & newInfo);
+    void initializeSoundClip( const int & _fileCount);
+    void changeFile ();
    
     ofDirectory soundClipDir;
     uint8_t fileCount{0};

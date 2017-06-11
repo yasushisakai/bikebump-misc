@@ -8,8 +8,6 @@
 
 #include "DeltaHistoryPlotter.hpp"
 
-unsigned short DeltaHistoryPlotter::averageCount{ 0 };
-
 void DeltaHistoryPlotter::pushDelta (const float& _positionParameter, const float & _deltaValue) {
     deltaValues.push_back(_deltaValue);
     
@@ -48,6 +46,17 @@ void DeltaHistoryPlotter::pushDelta (const float& _positionParameter, const floa
 
 }
 
+bool DeltaHistoryPlotter::incrementThreshold () {
+    threshold += thresholdInc;
+    bool isCap = threshold > thresholdMax;
+    
+    if(isCap) {
+        threshold = thresholdMin;
+    }
+    
+    return isCap;
+}
+
 void DeltaHistoryPlotter::update(const float& _deltaValue) {
     
     pushDelta(info -> positionParameter, _deltaValue);
@@ -66,3 +75,7 @@ void DeltaHistoryPlotter::update(const float& _deltaValue) {
     
     fbo.end();
 }
+
+unsigned short DeltaHistoryPlotter::averageCount{ 0 };
+float DeltaHistoryPlotter::threshold { DeltaHistoryPlotter::thresholdMin };
+

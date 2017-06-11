@@ -8,11 +8,32 @@
 
 #include "DetectionIndicator.hpp"
 
-DetectionIndicator::DetectionIndicator (const int & _width, const int & _height) {
-    waitingRanges = vector<vector<float>> (0, vector<float>(2));
-    leavingRanges = vector<vector<float>> (0, vector<float>(2));
-    fbo.allocate(_width, _height);
-    status = INITIAL;
+void DetectionIndicator::drawBar (const float & start, const float & end) const {
+    float sx = start * fbo.getWidth();
+    float duration = end - start;
+    float width = duration * fbo.getWidth();
+    ofDrawRectangle(sx, 0, width, fbo.getHeight());
+    
+    string durationMS = ofToString((int)(duration * info -> msLength)) + " ms";
+    float durationMSWidth = Goodies::getBitMapStringWidth(durationMS);
+    if (width > durationMSWidth) {
+        ofSetColor(white);
+        ofDrawBitmapString(durationMS, sx + (width - durationMSWidth) * 0.5, (fbo.getHeight() + Goodies::bitmapStringHeight)*0.5);
+    }
+    
+}
+
+bool DetectionIndicator::incrementThresholdLength() {
+    thresholdLength += thresholdLengthInc;
+    
+    bool isCap = thresholdLength > thresholdLengthMax;
+    
+    if(isCap) {
+        thresholdLength = thresholdLengthMin;
+    }
+    
+    return isCap;
+    
 }
 
 void DetectionIndicator::update (const bool & _isLeftAbove, const bool & _isRightAbove) {
@@ -58,9 +79,9 @@ void DetectionIndicator::update (const bool & _isLeftAbove, const bool & _isRigh
         float sx = leavingRanges[1][1] * fbo.getWidth() + margin;
         
         float y = (fbo.getHeight() + Goodies::bitmapStringHeight) * 0.5;
-        string waitPitch = "<-> " + ofToString((waitingRanges[1][0] - waitingRanges[0][0]) * info -> msLength ) + " ms";
+        // string waitPitch = "<-> " + ofToString((waitingRanges[1][0] - waitingRanges[0][0]) * info -> msLength ) + " ms";
         
-        ofDrawBitmapString(waitPitch, sx, y);
+        // ofDrawBitmapString(waitPitch, sx, y);
         
     }
     
@@ -83,17 +104,9 @@ void DetectionIndicator::update (const bool & _isLeftAbove, const bool & _isRigh
     fbo.end();
 }
 
-void DetectionIndicator::drawBar (const float & start, const float & end) const {
-    float sx = start * fbo.getWidth();
-    float duration = end - start;
-    float width = duration * fbo.getWidth();
-    ofDrawRectangle(sx, 0, width, fbo.getHeight());
-    
-    string durationMS = ofToString((int)(duration * info -> msLength)) + " ms";
-    float durationMSWidth = Goodies::getBitMapStringWidth(durationMS);
-    if (width > durationMSWidth) {
-        ofSetColor(white);
-        ofDrawBitmapString(durationMS, sx + (width - durationMSWidth) * 0.5, (fbo.getHeight() + Goodies::bitmapStringHeight)*0.5);
+void DetectionIndicator::closeLeaving () {
+    if (waitingRanges.size() > leavingRanges.size()) {
+        leavingRanges.push_back(vector<float>{lastDetectionStart, 1.0f});
     }
-    
 }
+

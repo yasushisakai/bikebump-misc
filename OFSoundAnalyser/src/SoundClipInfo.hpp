@@ -19,7 +19,17 @@ class SoundClipInfo {
     }
     
 public:
+    
+    SoundClipInfo() = default;
+    SoundClipInfo(const string & _filename, const long& _length, const char * _summary);
+    void update ();
+
+    
+    inline void incrementPosition () { position++; };
+    inline bool doesNeedToReset () const { return position >= length; };
+    
     std::string filename;
+    
     long length;
     int nChannels;
     int sampleRate;
@@ -27,21 +37,13 @@ public:
     int dataSize;
     float duration;
     int msLength;
-    
+
     float targetFrequency;
     
     long position {0};
     float positionParameter; // 0.0 - 1.0
     int positionMS;
     
-    SoundClipInfo() = default;
-    
-    SoundClipInfo(const string& _filename, const long& _length, const char * _summary);
-    
-    void update ();
-    
-    inline void incrementPosition () { position++; };
-    inline bool doesNeedToReset () const { return position >= length; };
 };
 
 enum DetectionStates: uint8_t {

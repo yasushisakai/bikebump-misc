@@ -20,18 +20,20 @@ class MetaInfoPanel {
     ofFbo fbo;
     std::string filename;
     std::shared_ptr<SoundClipInfo> info;
+
 public:
     
     MetaInfoPanel() = default;
-    
     inline MetaInfoPanel(const int& _width, const int& _height) {
         fbo.allocate(_width, _height, GL_RGB);
     };
     
-    inline void changeFile (const std::shared_ptr<SoundClipInfo> & newInfo) { info = newInfo; };
+    inline void changeFile (const std::shared_ptr<SoundClipInfo> & newInfo)
+    { 
+      info = newInfo;
+    };
 
     void update() const;
-    
     inline void draw() { fbo.draw(0, 0); ofTranslate(0, fbo.getHeight()); };
     
 };

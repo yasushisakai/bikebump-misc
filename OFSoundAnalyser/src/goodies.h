@@ -15,9 +15,6 @@
 
 namespace Goodies {
 
-    const int bitmapStringWidth { 8 }; // equivalent to fontSize;
-    const int bitmapStringHeight { 12 };
-
     // https://forum.openframeworks.cc/t/how-to-get-size-of-ofdrawbitmapstring/22578/6
     ofRectangle getBitMapStringBoundingBox (const std::string text);
     
@@ -31,6 +28,8 @@ namespace Goodies {
     float getFreqFromIndex (const int & index, const int & sampleRate);
     int getIndexFromFreq (const float & frequency, const int & sampleRate);
     
+    const int bitmapStringWidth { 8 }; // equivalent to fontSize;
+    const int bitmapStringHeight { 12 };
 }
 
 #endif /* goodies_hpp */
