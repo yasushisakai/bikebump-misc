@@ -1,0 +1,14 @@
+{
+  "name": "dingrename",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsc && node ./dist/index.js"
+  },
+  "author": "Yasushi Sakai",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^7.0.29"
+  }
+}

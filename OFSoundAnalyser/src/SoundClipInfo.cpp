@@ -20,8 +20,10 @@ SoundClipInfo::SoundClipInfo (const std::string & _filename, const long & _lengt
     
     
     vector<std::string> breakDownFilename = ofSplitString(ofSplitString(filename, ".")[0], "_");
-    targetFrequency = ofToInt(breakDownFilename[breakDownFilename.size()-1]);
     
+    // example filename : crane_1497208128217_n_1_0_3609.wav
+    targetFrequency = ofToInt(breakDownFilename[breakDownFilename.size()-1]);
+    isDoubleDing = ofToInt(breakDownFilename[breakDownFilename.size()-2]) == 1;
 }
 
 void SoundClipInfo::update () {
