@@ -23,7 +23,9 @@ SoundClipInfo::SoundClipInfo (const std::string & _filename, const long & _lengt
     
     // example filename : crane_1497208128217_n_1_0_3609.wav
     targetFrequency = ofToInt(breakDownFilename[breakDownFilename.size()-1]);
+    isRandom = breakDownFilename[0] == "random";
     isDoubleDing = ofToInt(breakDownFilename[breakDownFilename.size()-2]) == 1;
+
 }
 
 void SoundClipInfo::update () {

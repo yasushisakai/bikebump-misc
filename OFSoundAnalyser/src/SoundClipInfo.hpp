@@ -40,6 +40,7 @@ class SoundClipInfo {
   int msLength;
 
   float targetFrequency;
+  bool isRandom;
   bool isDoubleDing;
 
   long position {0};

@@ -20,10 +20,6 @@ class DetectionIndicator {
     
     void drawBar (const float & start, const float & end) const;
 
-    constexpr static float thresholdLengthMin{ 10.0f };
-    constexpr static float thresholdLengthMax{ 40.0f };
-    constexpr static float thresholdLengthInc{ 10.0f };
-
     ofFbo fbo;
     std::shared_ptr<SoundClipInfo> info;
     

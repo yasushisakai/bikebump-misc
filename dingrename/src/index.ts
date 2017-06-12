@@ -14,7 +14,7 @@ function readdirPromise (directory: string): Promise<string []> {
 }
 
 function excludeHidden (dirname: string): boolean {
-  return !(dirname.startsWith('.') || dirname.startsWith('random'))
+  return !(dirname.startsWith('.') || dirname === 'random')
 }
 
 function bellFrequencyMap (bellName: string): number {
@@ -35,35 +35,46 @@ function bellFrequencyMap (bellName: string): number {
 }
 
 function folderCodeMap (folder: string): string {
-         switch (folder) {
-          case 'noisy-single' :
-            return 'n_1_0'
-          case 'noisy-double' :
-            return 'n_0_1'
-          case 'silent-single' :
-            return 's_1_0'
-          case 'silent-double' :
-            return 's_0_1'
-        }
+  switch (folder) {
+    case 'noisy-single' :
+      return 'n_1_0'
+    case 'noisy-double' :
+      return 'n_0_1'
+    case 'silent-single' :
+      return 's_1_0'
+    case 'silent-double' :
+      return 's_0_1'
+    default :
+      return 'n_0_0'
+  }
 }
 
 async function main () {
   const ringFolders: string[] = await readdirPromise(dir)
+  const randomFileNames = await readdirPromise(`${dir}/random`)
   ringFolders.map( async (folders: string) => {
     const fullPath = `${dir}${folders}`
     const typeFolders = await readdirPromise(fullPath)
 
     typeFolders.map( async (folderName: string) => {
       const fullPathToFolder = `${fullPath}/${folderName}`
+      randomFileNames.map((filename: string) => {
+        const id: string = filename.split('_')[1].split('.')[0]
+        const newRandomFilePath: string = `${dir}random_${id}_n_0_0_${bellFrequencyMap(folders)}.wav`
+        // console.log(newRandomFilePath)
+        createReadStream(`${dir}/random/${filename}`).pipe(createWriteStream(newRandomFilePath))
+      })
+
       const filenames = await readdirPromise(fullPathToFolder)
 
       filenames.map ( (filename: string) => {
         // console.log(`${fullPathToFolder}/${filename}`)
         const id: string = filename.split('_')[1].split('.')[0]
-        const newFileName: string = `${dir}${folders}_${id}_${folderCodeMap(folderName)}_${bellFrequencyMap(folders)}.wav`
+        const code: string = folderCodeMap(folderName)
+        const freq: number = bellFrequencyMap(folders)
+        const newFileName: string = `${dir}${folders}_${id}_${code}_${freq}.wav`
         createReadStream(`${fullPathToFolder}/${filename}`).pipe(createWriteStream(newFileName))
       })
-
     })
 
   })

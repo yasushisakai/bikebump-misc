@@ -224,11 +224,15 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
       // num of detections = number of waitings
       uint8_t numWaitings = waitingRanges.size();
       bool didPass{false};
-
-      if (soundInfoPtr -> isDoubleDing) {
-        didPass = numWaitings == 2;
+      
+      if (soundInfoPtr -> isRandom) {
+        didPass = numWaitings == 0;
       } else {
-        didPass = numWaitings == 1;
+        if (soundInfoPtr -> isDoubleDing) {
+          didPass = numWaitings == 2;
+        } else {
+          didPass = numWaitings == 1;
+        }
       }
 
       file << ", didPass, " << didPass;

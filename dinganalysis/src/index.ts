@@ -1,7 +1,7 @@
 import { createReadStream, createWriteStream, readFile } from 'fs'
 import { resolve } from 'path'
 
-const csvFilePath: string = resolve ( __dirname, '../../OFSoundAnalyser/bin/data/out.csv')
+const csvFilePath: string = resolve ( __dirname, '../../OFSoundAnalyser/bin/data/out_bu.csv')
 
 function readFilePromise (filePath: string): Promise<string []> {
   return new Promise((resolve, reject) => {
@@ -59,26 +59,57 @@ function didItMatch (line: string[]): boolean {
   return false
 }
 
+function checkCase (baseObj: any, line: string[], key: string, blacklist: string[] = []): void {
+
+  for (const black of blacklist) {
+    if (black === line[0]) {
+      return
+    }
+  }
+
+  if (!(key in baseObj)) {
+    baseObj[key] = [0, 0]
+  }
+  baseObj[key][0] ++
+
+  if (didItMatch(line)) {
+    baseObj[key][1] ++
+  }
+
+}
+
 async function main () {
   const csvData: string[] = await readFilePromise(csvFilePath)
 
   // console.log(csvData)
 
-  // A. which threshold is the best?
-  const thresholds: { [key: string]: [number] } = {}
+  // X. check for bad recordings
+  const recordings: { [key: string]: number[]} = {}
   const csvDataByElements: string[][] = [] // just to make it easier afterwards
-
   for (const line of csvData) {
     const elements: string[] = line.split(',')
     csvDataByElements.push(elements)
-    if (!(`${ elements[2] }` in thresholds)) {
-      thresholds[`${elements[2]}`] = [1, 0]
-    }
-    thresholds[`${elements[2]}`][0] ++
-    if (didItMatch(elements)) {
-      thresholds[`${elements[2]}`][1] ++
-    }
+    checkCase (recordings, elements, `${elements[0]}`)
+  }
 
+  // console.log(recordings)
+
+  const blacklist: string[] = []
+  Object.keys(recordings).map((key: string) => {
+    const results = recordings[key]
+    const ratio = results[1] / results[0]
+    if (results[1] < 1) {
+      blacklist.push(key)
+    }
+  })
+
+  console.log(blacklist)
+
+  // A. which threshold is the best?
+  const thresholds: { [key: string]: number[] } = {}
+
+  for (const line of csvDataByElements) {
+    checkCase (thresholds, line, `${line[2]}`, blacklist)
   }
 
   console.log(thresholds)
@@ -87,14 +118,7 @@ async function main () {
   const durations: {[key: string]: [number]} = {}
 
   for (const line of csvDataByElements) {
-    if (!(`${ line[3] }` in durations)) {
-      durations[`${line[3]}`] = [1, 0]
-    }
-    durations[`${line[3]}`][0] ++
-    if (didItMatch(line))  {
-      durations[`${line[3]}`][1] ++
-    }
-
+    checkCase (durations, line, `${line[3]}`, blacklist)
   }
 
   console.log(durations)
@@ -104,14 +128,7 @@ async function main () {
 
   for (const line of csvDataByElements) {
     const key: string = `t${line[2]}d${line[3]}`
-    if (!(key in combined)) {
-      combined[key] = [0, 0]
-    }
-    combined[key][0] ++
-    if (didItMatch(line))  {
-      combined[key][1] ++
-    }
-
+    checkCase (combined, line, key, blacklist)
   }
 
   const ratio: { [key: string]: number } = {}

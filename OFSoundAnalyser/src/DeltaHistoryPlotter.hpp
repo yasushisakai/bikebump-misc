@@ -21,9 +21,6 @@ class DeltaHistoryPlotter {
     
     constexpr static float maxDelta { 50.0f };
     constexpr static unsigned short nAverage { 5 };
-    constexpr static float thresholdMin { 1.0f };
-    constexpr static float thresholdMax { 4.5f };
-    constexpr static float thresholdInc { 0.5f };
    
     ofFbo fbo;
     std::shared_ptr<SoundClipInfo> info;
