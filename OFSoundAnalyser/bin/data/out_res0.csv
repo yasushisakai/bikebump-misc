@@ -1,0 +1,166 @@
+crane_1497208128217_n_1_0_3609.wav, 1, 0, waiting, 2767, 2789, 4175, 4196, leaving, 2789, 2890, 4196, 5711, didPass, 0, detectionBtwn, 0, detectionWhole,2943
+crane_1497208128217_n_1_0_3609.wav, 3, 0, waiting, 2767, 2794, 4175, 4196, leaving, 2794, 2890, 4196, 5620, didPass, 0, detectionBtwn, 0, detectionWhole,2853
+crane_1497208128217_n_1_0_3609.wav, 5, 0, waiting, 4159, 4180, leaving, 4180, 5300, didPass, 1, detectionWhole,1141
+crane_1497208128217_n_1_0_3609.wav, 7, 0, waiting, 4159, 4170, 4671, 4692, 4916, 4938, 5172, 5204, leaving, 4170, 4538, 4692, 4783, 4938, 5055, 5204, 5304, didPass, 0, detectionWhole,1144
+crane_1497208128217_n_1_0_3609.wav, 1, 100, waiting, 2703, 2815, 4111, 4212, leaving, 2815, 2954, 4212, 5652, didPass, 0, detectionBtwn, 0, detectionWhole,2949
+crane_1497208128217_n_1_0_3609.wav, 3, 100, waiting, 2794, 2901, 4202, 4324, leaving, 2901, 2922, 4324, 5610, didPass, 0, detectionBtwn, 0, detectionWhole,2815
+crane_1497208128217_n_1_0_3609.wav, 5, 100, waiting, 4154, 4255, leaving, 4255, 5311, didPass, 1, detectionWhole,1157
+crane_1497208128217_n_1_0_3609.wav, 7, 100, waiting, 4106, 4212, 4751, 4852, 5135, 5236, leaving, 4212, 4362, 4852, 5002, 5236, 5258, didPass, 0, detectionWhole,1151
+crane_1497208128217_n_1_0_3609.wav, 1, 200, waiting, 2655, 2874, 4202, 4415, leaving, 2874, 2922, 4415, 5604, didPass, 0, detectionBtwn, 0, detectionWhole,2949
+crane_1497208128217_n_1_0_3609.wav, 3, 200, waiting, 4148, 4351, leaving, 2741, 2879, 4351, 5567, didPass, 1, detectionWhole,1418
+crane_1497208128217_n_1_0_3609.wav, 5, 200, waiting, 4116, 4319, leaving, 4319, 5386, didPass, 1, detectionWhole,1269
+crane_1497208128217_n_1_0_3609.wav, 7, 200, waiting, 4084, 4287, 4991, 5204, leaving, 4287, 4351, 4720, 4858, 5204, 5247, didPass, 0, detectionBtwn, 0, detectionWhole,1162
+crane_1497208128217_n_1_0_3609.wav, 1, 300, waiting, 4191, 4500, leaving, 2773, 2890, 4500, 5599, didPass, 1, detectionWhole,1407
+crane_1497208128217_n_1_0_3609.wav, 3, 300, waiting, 4170, 4479, leaving, 2762, 2901, 4479, 5588, didPass, 1, detectionWhole,1418
+crane_1497208128217_n_1_0_3609.wav, 5, 300, waiting, 4127, 4431, leaving, 4431, 5408, didPass, 1, detectionWhole,1280
+crane_1497208128217_n_1_0_3609.wav, 7, 300, waiting, leaving, 4084, 4340, 4730, 4863, 4991, 5236, didPass, 0
+crane_1497208128217_n_1_0_3609.wav, 1, 400, waiting, 4179, 4586, leaving, 2762, 2890, 4586, 5711, didPass, 1, detectionWhole,1532
+crane_1497208128217_n_1_0_3609.wav, 3, 400, waiting, 4132, 4554, leaving, 2730, 2858, 4554, 5535, didPass, 1, detectionWhole,1402
+crane_1497208128217_n_1_0_3609.wav, 5, 400, waiting, 4090, 4522, leaving, 4522, 5364, didPass, 1, detectionWhole,1274
+crane_1497208128217_n_1_0_3609.wav, 7, 400, waiting, leaving, 4175, 4298, 4692, 4820, 4948, 5071, 5194, 5322, didPass, 0
+crane_1497208150576_n_1_0_3609.wav, 1, 0, waiting, 2959, 2975, 5396, 5409, 5898, 5924, leaving, 2975, 5263, 5409, 5770, 5924, 6058, didPass, 0, detectionWhole,3098+
+crane_1497208150576_n_1_0_3609.wav, 3, 0, waiting, 3039, 3056, 4842, 4863, leaving, 0, 106, 3056, 4580, 4863, 4959, didPass, 0, detectionBtwn, 0, detectionWhole,1919
+crane_1497208150576_n_1_0_3609.wav, 5, 0, waiting, 3258, 3284, 3898, 3924, leaving, 3284, 3391, 3924, 4027, didPass, 0, detectionBtwn, 0, detectionWhole,769
+crane_1497208150576_n_1_0_3609.wav, 7, 0, waiting, leaving, didPass, 0
+crane_1497208150576_n_1_0_3609.wav, 1, 100, waiting, 2965, 3092, 5396, 5503, 5908, 6036, leaving, 21, 149, 3092, 5258, 5503, 5775, didPass, 0, detectionWhole,2810
+crane_1497208150576_n_1_0_3609.wav, 3, 100, waiting, 3044, 3156, 4842, 4948, leaving, 0, 106, 3156, 4586, 4948, 4970, didPass, 0, detectionBtwn, 0, detectionWhole,1925
+crane_1497208150576_n_1_0_3609.wav, 5, 100, waiting, 3258, 3359, 3892, 4004, leaving, 3359, 3391, 4004, 4026, didPass, 0, detectionBtwn, 0, detectionWhole,767
+crane_1497208150576_n_1_0_3609.wav, 7, 100, waiting, leaving, didPass, 0
+crane_1497208150576_n_1_0_3609.wav, 1, 200, waiting, 3039, 3252, 5482, 5695, leaving, 3252, 5220, 5695, 5727, didPass, 0, detectionBtwn, 0, detectionWhole,2687
+crane_1497208150576_n_1_0_3609.wav, 3, 200, waiting, 3125, 3343, leaving, 0, 53, 3343, 4180, 4426, 4559, 4815, 4948, didPass, 1, detectionWhole,1823
+crane_1497208150576_n_1_0_3609.wav, 5, 200, waiting, 3231, 3455, leaving, 3455, 3615, 3876, 4010, didPass, 1, detectionWhole,778
+crane_1497208150576_n_1_0_3609.wav, 7, 200, waiting, leaving, didPass, 0
+crane_1497208150576_n_1_0_3609.wav, 1, 300, waiting, 3029, 3348, leaving, 3348, 5194, 5450, 5716, didPass, 1, detectionWhole,2687
+crane_1497208150576_n_1_0_3609.wav, 3, 300, waiting, 0, 6045, 3114, 3428, 4266, 4575, leaving, 6045, 42, 3428, 4132, 4575, 4650, 4767, 4900, didPass, 0, detectionWhole,4900
+crane_1497208150576_n_1_0_3609.wav, 5, 300, waiting, 3210, 3535, leaving, 3535, 3594, 3860, 3983, didPass, 1, detectionWhole,773
+crane_1497208150576_n_1_0_3609.wav, 7, 300, waiting, leaving, didPass, 0
+crane_1497208150576_n_1_0_3609.wav, 1, 400, waiting, 3050, 3476, leaving, 3476, 5247, 5364, 5759, 5887, 6009, didPass, 1, detectionWhole,2958
+crane_1497208150576_n_1_0_3609.wav, 3, 400, waiting, 3284, 3690, leaving, 3029, 3156, 3690, 4180, 4436, 4564, 4810, 4945, didPass, 1, detectionWhole,1660
+crane_1497208150576_n_1_0_3609.wav, 5, 400, waiting, leaving, 3262, 3380, 3903, 4031, didPass, 0
+crane_1497208150576_n_1_0_3609.wav, 7, 400, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 1, 0, waiting, 3711, 3722, leaving, 3722, 3828, didPass, 1, detectionWhole,117
+crane_1497208169856_n_1_0_3609.wav, 3, 0, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 5, 0, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 7, 0, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 1, 100, waiting, 3679, 3786, leaving, 3786, 3812, didPass, 1, detectionWhole,133
+crane_1497208169856_n_1_0_3609.wav, 3, 100, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 5, 100, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 7, 100, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 1, 200, waiting, leaving, 3711, 3828, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 3, 200, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 5, 200, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 7, 200, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 1, 300, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 3, 300, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 5, 300, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 7, 300, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 1, 400, waiting, leaving, 3684, 3818, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 3, 400, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 5, 400, waiting, leaving, didPass, 0
+crane_1497208169856_n_1_0_3609.wav, 7, 400, waiting, leaving, didPass, 0
+crane_1497208198740_n_1_0_3609.wav, 1, 0, waiting, 735, 762, 991, 1023, leaving, 762, 874, 1023, 3178, didPass, 0, detectionBtwn, 0, detectionWhole,2442
+crane_1497208198740_n_1_0_3609.wav, 3, 0, waiting, 979, 1002, 2506, 2533, leaving, 1002, 1866, 2533, 2634, didPass, 0, detectionBtwn, 0, detectionWhole,1655
+crane_1497208198740_n_1_0_3609.wav, 5, 0, waiting, 975, 1002, leaving, 1002, 1492, didPass, 1, detectionWhole,516
+crane_1497208198740_n_1_0_3609.wav, 7, 0, waiting, 981, 1002, leaving, 1002, 1231, didPass, 1, detectionWhole,250
+crane_1497208198740_n_1_0_3609.wav, 1, 100, waiting, 671, 778, 927, 1045, 2981, 3092, leaving, 778, 810, 1045, 2858, 3092, 3231, didPass, 0, detectionWhole,2559
+crane_1497208198740_n_1_0_3609.wav, 3, 100, waiting, 1023, 1146, 1535, 1663, 2554, 2655, 3060, 3167, leaving, 1146, 1407, 1663, 1919, 2655, 2682, 3167, 3199, didPass, 0, detectionWhole,2175
+crane_1497208198740_n_1_0_3609.wav, 5, 100, waiting, 991, 1098, leaving, 1098, 1375, didPass, 1, detectionWhole,383
+crane_1497208198740_n_1_0_3609.wav, 7, 100, waiting, 981, 1082, leaving, 1082, 1237, didPass, 1, detectionWhole,255
+crane_1497208198740_n_1_0_3609.wav, 1, 200, waiting, 991, 1205, leaving, 746, 863, 1205, 3171, didPass, 1, detectionWhole,2179
+crane_1497208198740_n_1_0_3609.wav, 3, 200, waiting, 911, 1119, leaving, 1119, 1941, 2581, 2703, 3092, 3210, didPass, 1, detectionWhole,2298
+crane_1497208198740_n_1_0_3609.wav, 5, 200, waiting, 1023, 1237, leaving, 1237, 1397, didPass, 1, detectionWhole,373
+crane_1497208198740_n_1_0_3609.wav, 7, 200, waiting, 959, 1167, leaving, 1167, 1210, didPass, 1, detectionWhole,250
+crane_1497208198740_n_1_0_3609.wav, 1, 300, waiting, 938, 1253, leaving, 682, 799, 1253, 2847, 2981, 3242, didPass, 1, detectionWhole,2303
+crane_1497208198740_n_1_0_3609.wav, 3, 300, waiting, 1013, 1317, 1530, 1850, leaving, 1317, 1397, 1850, 1914, 2581, 2698, 3087, 3210, didPass, 0, detectionBtwn, 0, detectionWhole,2197
+crane_1497208198740_n_1_0_3609.wav, 5, 300, waiting, 1002, 1317, leaving, 1317, 1375, didPass, 1, detectionWhole,373
+crane_1497208198740_n_1_0_3609.wav, 7, 300, waiting, leaving, 959, 1210, didPass, 0
+crane_1497208198740_n_1_0_3609.wav, 1, 400, waiting, 917, 1322, leaving, 650, 785, 1322, 2826, 2959, 3215, didPass, 1, detectionWhole,2298
+crane_1497208198740_n_1_0_3609.wav, 3, 400, waiting, 997, 1407, leaving, 1407, 1898, 2538, 2661, didPass, 1, detectionWhole,1663
+crane_1497208198740_n_1_0_3609.wav, 5, 400, waiting, 975, 1402, leaving, 1402, 1487, didPass, 1, detectionWhole,511
+crane_1497208198740_n_1_0_3609.wav, 7, 400, waiting, leaving, 938, 1194, didPass, 0
+crane_1497208220041_n_1_0_3609.wav, 1, 0, waiting, 3050, 3060, 4074, 4084, leaving, 3060, 3946, 4084, 4196, didPass, 0, detectionBtwn, 0, detectionWhole,1146
+crane_1497208220041_n_1_0_3609.wav, 3, 0, waiting, 3114, 3124, leaving, 3124, 3754, didPass, 1, detectionWhole,639
+crane_1497208220041_n_1_0_3609.wav, 5, 0, waiting, 3092, 3108, leaving, 3108, 3722, didPass, 1, detectionWhole,629
+crane_1497208220041_n_1_0_3609.wav, 7, 0, waiting, 3167, 3186, leaving, 3186, 3690, didPass, 1, detectionWhole,522
+crane_1497208220041_n_1_0_3609.wav, 1, 100, waiting, 3023, 3135, 4052, 4159, leaving, 3135, 3914, 4159, 4170, didPass, 0, detectionBtwn, 0, detectionWhole,1146
+crane_1497208220041_n_1_0_3609.wav, 3, 100, waiting, 3114, 3215, leaving, 3215, 3748, didPass, 1, detectionWhole,634
+crane_1497208220041_n_1_0_3609.wav, 5, 100, waiting, 3066, 3172, leaving, 3172, 3711, didPass, 1, detectionWhole,645
+crane_1497208220041_n_1_0_3609.wav, 7, 100, waiting, 3082, 3188, leaving, 3188, 3722, didPass, 1, detectionWhole,639
+crane_1497208220041_n_1_0_3609.wav, 1, 200, waiting, 3050, 3263, leaving, 3263, 3946, 4074, 4202, didPass, 1, detectionWhole,1151
+crane_1497208220041_n_1_0_3609.wav, 3, 200, waiting, 3029, 3231, leaving, 3231, 3786, didPass, 1, detectionWhole,757
+crane_1497208220041_n_1_0_3609.wav, 5, 200, waiting, 3039, 3263, leaving, 3263, 3812, didPass, 1, detectionWhole,773
+crane_1497208220041_n_1_0_3609.wav, 7, 200, waiting, 3135, 3348, leaving, 3348, 3770, didPass, 1, detectionWhole,634
+crane_1497208220041_n_1_0_3609.wav, 1, 300, waiting, 3092, 3407, leaving, 3407, 4116, didPass, 1, detectionWhole,1023
+crane_1497208220041_n_1_0_3609.wav, 3, 300, waiting, 3050, 3370, leaving, 3370, 3812, didPass, 1, detectionWhole,762
+crane_1497208220041_n_1_0_3609.wav, 5, 300, waiting, 3029, 3348, leaving, 3348, 3786, didPass, 1, detectionWhole,757
+crane_1497208220041_n_1_0_3609.wav, 7, 300, waiting, 3114, 3423, leaving, 3423, 3748, didPass, 1, detectionWhole,634
+crane_1497208220041_n_1_0_3609.wav, 1, 400, waiting, 3060, 3476, leaving, 3476, 3956, didPass, 1, detectionWhole,895
+crane_1497208220041_n_1_0_3609.wav, 3, 400, waiting, 3029, 3455, leaving, 3455, 3786, didPass, 1, detectionWhole,757
+crane_1497208220041_n_1_0_3609.wav, 5, 400, waiting, 3103, 3519, leaving, 3519, 3754, didPass, 1, detectionWhole,650
+crane_1497208220041_n_1_0_3609.wav, 7, 400, waiting, 3188, 3599, leaving, 3599, 3700, didPass, 1, detectionWhole,511
+crane_1497208242396_n_1_0_3609.wav, 1, 0, waiting, 3535, 3551, 5348, 5364, leaving, 3551, 5220, 5364, 5599, didPass, 0, detectionBtwn, 0, detectionWhole,2063
+crane_1497208242396_n_1_0_3609.wav, 3, 0, waiting, 3508, 3535, leaving, 3535, 5172, didPass, 1, detectionWhole,1663
+crane_1497208242396_n_1_0_3609.wav, 5, 0, waiting, 3620, 3642, 4394, 4404, 4767, 4799, leaving, 3642, 4255, 4404, 4644, 4799, 5023, didPass, 0, detectionWhole,1402
+crane_1497208242396_n_1_0_3609.wav, 7, 0, waiting, 3578, 3599, 3956, 3978, 4212, 4244, leaving, 3599, 3834, 3978, 4090, 4244, 4991, didPass, 0, detectionWhole,1413
+crane_1497208242396_n_1_0_3609.wav, 1, 100, waiting, 3535, 3647, 5322, 5439, leaving, 3647, 5199, 5439, 5588, didPass, 0, detectionBtwn, 0, detectionWhole,2053
+crane_1497208242396_n_1_0_3609.wav, 3, 100, waiting, 3498, 3604, 4767, 4884, leaving, 3604, 4639, 4884, 5300, didPass, 0, detectionBtwn, 0, detectionWhole,1802
+crane_1497208242396_n_1_0_3609.wav, 5, 100, waiting, 3594, 3706, 4362, 4468, leaving, 3706, 4103, 4468, 5012, didPass, 0, detectionBtwn, 0, detectionWhole,1418
+crane_1497208242396_n_1_0_3609.wav, 7, 100, waiting, 3551, 3663, 4191, 4298, leaving, 3663, 4063, 4298, 5098, didPass, 0, detectionBtwn, 0, detectionWhole,1546
+crane_1497208242396_n_1_0_3609.wav, 1, 200, waiting, 3519, 3732, 5428, 5652, leaving, 3732, 5310, 5652, 5684, didPass, 0, detectionBtwn, 0, detectionWhole,2165
+crane_1497208242396_n_1_0_3609.wav, 3, 200, waiting, 3604, 3818, leaving, 3818, 5007, 5130, 5268, didPass, 1, detectionWhole,1663
+crane_1497208242396_n_1_0_3609.wav, 5, 200, waiting, 3540, 3748, leaving, 3748, 5087, didPass, 1, detectionWhole,1546
+crane_1497208242396_n_1_0_3609.wav, 7, 200, waiting, 3647, 3855, 4415, 4623, 4794, 5007, leaving, 3855, 4020, 4154, 4282, 4623, 4660, 5007, 5044, didPass, 0, detectionWhole,1397
+crane_1497208242396_n_1_0_3609.wav, 1, 300, waiting, 3471, 3796, leaving, 3796, 5268, 5386, 5647, didPass, 1, detectionWhole,2175
+crane_1497208242396_n_1_0_3609.wav, 3, 300, waiting, 3562, 3876, 4191, 4500, leaving, 3876, 4068, 4500, 5220, didPass, 0, detectionBtwn, 0, detectionWhole,1658
+crane_1497208242396_n_1_0_3609.wav, 5, 300, waiting, 3508, 3828, leaving, 3828, 4287, 4410, 4671, 4799, 5044, didPass, 1, detectionWhole,1535
+crane_1497208242396_n_1_0_3609.wav, 7, 300, waiting, 3615, 3924, leaving, 3924, 3999, 4132, 4266, 4383, 4650, 4772, 5034, didPass, 1, detectionWhole,1418
+crane_1497208242396_n_1_0_3609.wav, 1, 400, waiting, 3572, 3988, leaving, 3988, 5247, 5375, 5631, didPass, 1, detectionWhole,2058
+crane_1497208242396_n_1_0_3609.wav, 3, 400, waiting, 3562, 3988, 4191, 4602, leaving, 3988, 4074, 4602, 5220, didPass, 0, detectionBtwn, 0, detectionWhole,1658
+crane_1497208242396_n_1_0_3609.wav, 5, 400, waiting, 3519, 3935, leaving, 3935, 4287, 4412, 4666, 4788, 5055, didPass, 1, detectionWhole,1535
+crane_1497208242396_n_1_0_3609.wav, 7, 400, waiting, leaving, 3626, 4031, 4148, 4287, 4415, 4671, 4788, 5044, didPass, 0
+crane_1497208269013_n_1_0_3609.wav, 1, 0, waiting, 3700, 3727, leaving, 3727, 6058, didPass, 1, detectionWhole,2357+
+crane_1497208269013_n_1_0_3609.wav, 3, 0, waiting, 3658, 3679, leaving, 0, 74, 3679, 5967, didPass, 1, detectionWhole,2309
+crane_1497208269013_n_1_0_3609.wav, 5, 0, waiting, 3754, 3770, leaving, 3770, 5674, didPass, 1, detectionWhole,1919
+crane_1497208269013_n_1_0_3609.wav, 7, 0, waiting, 3700, 3732, 4095, 4106, 4858, 4884, 5236, 5268, leaving, 3732, 3962, 4106, 4479, 4884, 5119, 5268, 5492, didPass, 0, detectionWhole,1791
+crane_1497208269013_n_1_0_3609.wav, 1, 100, waiting, 79, 180, 3658, 3764, leaving, 180, 212, 3764, 6058, didPass, 0, detectionBtwn, 0, detectionWhole,5978+
+crane_1497208269013_n_1_0_3609.wav, 3, 100, waiting, 3732, 3850, leaving, 0, 8, 3850, 5903, didPass, 1, detectionWhole,2170
+crane_1497208269013_n_1_0_3609.wav, 5, 100, waiting, 3690, 3812, leaving, 3812, 5626, didPass, 1, detectionWhole,1935
+crane_1497208269013_n_1_0_3609.wav, 7, 100, waiting, 3706, 3818, 4095, 4202, 4852, 4963, 5242, 5354, leaving, 3818, 3967, 4202, 4479, 4963, 5119, 5354, 5498, didPass, 0, detectionWhole,1791
+crane_1497208269013_n_1_0_3609.wav, 1, 200, waiting, 3663, 3871, leaving, 74, 213, didPass, 1, detectionWhole,-3450
+crane_1497208269013_n_1_0_3609.wav, 3, 200, waiting, 3770, 3978, leaving, 0, 42, 3978, 5951, didPass, 1, detectionWhole,2181
+crane_1497208269013_n_1_0_3609.wav, 5, 200, waiting, 3732, 3946, leaving, 3946, 5641, didPass, 1, detectionWhole,1908
+crane_1497208269013_n_1_0_3609.wav, 7, 200, waiting, 3812, 4031, 4831, 5034, leaving, 4031, 4458, 5034, 5492, didPass, 0, detectionBtwn, 0, detectionWhole,1679
+crane_1497208269013_n_1_0_3609.wav, 1, 300, waiting, 3727, 4042, leaving, 4042, 6058, didPass, 1, detectionWhole,2330+
+crane_1497208269013_n_1_0_3609.wav, 3, 300, waiting, 3679, 3983, leaving, 0, 106, 3983, 5599, 5732, 5988, didPass, 1, detectionWhole,2309
+crane_1497208269013_n_1_0_3609.wav, 5, 300, waiting, 3775, 4095, leaving, 4095, 5695, didPass, 1, detectionWhole,1919
+crane_1497208269013_n_1_0_3609.wav, 7, 300, waiting, 4116, 4436, leaving, 3732, 3988, 4436, 4500, 4884, 5140, 5268, 5524, didPass, 1, detectionWhole,1407
+crane_1497208269013_n_1_0_3609.wav, 1, 400, waiting, 3690, 4106, leaving, 4106, 6058, didPass, 1, detectionWhole,2367+
+crane_1497208269013_n_1_0_3609.wav, 3, 400, waiting, 3690, 4095, leaving, 0, 58, 4095, 5610, 5738, 5994, didPass, 1, detectionWhole,2303
+crane_1497208269013_n_1_0_3609.wav, 5, 400, waiting, 3775, 4180, leaving, 4180, 5690, didPass, 1, detectionWhole,1914
+crane_1497208269013_n_1_0_3609.wav, 7, 400, waiting, leaving, 3722, 3983, 4106, 4495, 4884, 5140, 5268, 5546, didPass, 0
+crane_1497208313810_n_1_0_3609.wav, 1, 0, waiting, 0, 21, 3583, 3594, leaving, 21, 117, 3594, 6036, didPass, 0, detectionBtwn, 0, detectionWhole,6036
+crane_1497208313810_n_1_0_3609.wav, 3, 0, waiting, 3562, 3583, 4970, 4991, 5226, 5247, leaving, 3583, 4842, 4991, 5098, 5247, 5738, didPass, 0, detectionWhole,2175
+crane_1497208313810_n_1_0_3609.wav, 5, 0, waiting, 3519, 3540, 3775, 3796, 5311, 5332, 5567, 5588, leaving, 3540, 3647, 3796, 4799, 5332, 5439, 5588, 5695, didPass, 0, detectionWhole,2175
+crane_1497208313810_n_1_0_3609.wav, 7, 0, waiting, 3604, 3626, 3988, 4010, leaving, 3626, 3732, 4010, 4756, didPass, 0, detectionBtwn, 0, detectionWhole,1151
+crane_1497208313810_n_1_0_3609.wav, 1, 100, waiting, 3562, 3668, leaving, 3668, 5983, didPass, 1, detectionWhole,2421
+crane_1497208313810_n_1_0_3609.wav, 3, 100, waiting, 3540, 3647, 5194, 5300, leaving, 3647, 5076, 5300, 5706, didPass, 0, detectionBtwn, 0, detectionWhole,2165
+crane_1497208313810_n_1_0_3609.wav, 5, 100, waiting, 3754, 3882, 5284, 5386, leaving, 3882, 4778, 5386, 5412, 5546, 5663, didPass, 0, detectionBtwn, 0, detectionWhole,1909
+crane_1497208313810_n_1_0_3609.wav, 7, 100, waiting, 3967, 4095, 5490, 5610, leaving, 3583, 3706, 4095, 4735, 5610, 5652, didPass, 0, detectionBtwn, 0, detectionWhole,1685
+crane_1497208313810_n_1_0_3609.wav, 1, 200, waiting, 3604, 3818, leaving, 3818, 6036, didPass, 1, detectionWhole,2431
+crane_1497208313810_n_1_0_3609.wav, 3, 200, waiting, 3556, 3764, 5226, 5439, leaving, 3764, 4842, 4963, 5098, 5439, 5738, didPass, 0, detectionBtwn, 0, detectionWhole,2181
+crane_1497208313810_n_1_0_3609.wav, 5, 200, waiting, 3775, 3978, leaving, 3519, 3647, 3978, 4799, 5300, 5428, 5567, 5695, didPass, 1, detectionWhole,1919
+crane_1497208313810_n_1_0_3609.wav, 7, 200, waiting, 3978, 4202, leaving, 3604, 3732, 4202, 4746, didPass, 1, detectionWhole,767
+crane_1497208313810_n_1_0_3609.wav, 1, 300, waiting, 3551, 3855, leaving, 3855, 5983, didPass, 1, detectionWhole,2431
+crane_1497208313810_n_1_0_3609.wav, 3, 300, waiting, 3513, 3818, leaving, 3818, 5684, didPass, 1, detectionWhole,2171
+crane_1497208313810_n_1_0_3609.wav, 5, 300, waiting, 3983, 4287, leaving, 3599, 3850, 4287, 4746, 5258, 5396, 5524, 5642, didPass, 1, detectionWhole,1658
+crane_1497208313810_n_1_0_3609.wav, 7, 300, waiting, 4180, 4490, leaving, 3540, 3668, 3924, 4047, 4490, 4692, didPass, 1, detectionWhole,511
+crane_1497208313810_n_1_0_3609.wav, 1, 400, waiting, 3615, 4026, leaving, 4026, 6058, didPass, 1, detectionWhole,2442+
+crane_1497208313810_n_1_0_3609.wav, 3, 400, waiting, 3572, 3988, leaving, 0, 6052, 3988, 5748, didPass, 1, detectionWhole,2175
+crane_1497208313810_n_1_0_3609.wav, 5, 400, waiting, 3791, 4196, leaving, 3535, 3663, 4196, 4692, 5327, 5450, 5588, 5716, didPass, 1, detectionWhole,1925
+crane_1497208313810_n_1_0_3609.wav, 7, 400, waiting, 3999, 4415, leaving, 4415, 4639, didPass, 1, detectionWhole,639
+crane_1497208359709_n_1_0_3609.wav, 1, 0, waiting, 3306, 3316, leaving, 3316, 5092, didPass, 1, detectionWhole,1786
+crane_1497208359709_n_1_0_3609.wav, 3, 0, waiting, 3258, 3274, leaving, 3274, 4671, didPass, 1, detectionWhole,1413
+crane_1497208359709_n_1_0_3609.wav, 5, 0, waiting, 3210, 3231, 4623, 4639, leaving, 3231, 4490, 4639, 4751, didPass, 0, detectionBtwn, 0, detectionWhole,1541
+crane_1497208359709_n_1_0_3609.wav, 7, 0, waiting, 3300, 3322, 4196, 4212, leaving, 3322, 4073, 4212, 4324, didPass, 0, detectionBtwn, 0, detectionWhole,1023
+crane_1497208359709_n_1_0_3609.wav, 1, 100, waiting, 3252, 3370, leaving, 3370, 5055, didPass, 1, detectionWhole,1802
+crane_1497208359709_n_1_0_3609.wav, 3, 100, waiting, 3316, 3428, leaving, 3428, 4735, didPass, 1, detectionWhole,1418

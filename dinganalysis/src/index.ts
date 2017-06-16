@@ -1,7 +1,8 @@
-import { createReadStream, createWriteStream, readFile } from 'fs'
+import { createReadStream, createWriteStream, readFile, writeFile } from 'fs'
 import { resolve } from 'path'
 
-const csvFilePath: string = resolve ( __dirname, '../../OFSoundAnalyser/bin/data/out_bu.csv')
+const fileTag = 'res0'
+const csvFilePath: string = resolve ( __dirname, `../../OFSoundAnalyser/bin/data/out_${fileTag}.csv`)
 
 function readFilePromise (filePath: string): Promise<string []> {
   return new Promise((resolve, reject) => {
@@ -109,7 +110,7 @@ async function main () {
   const thresholds: { [key: string]: number[] } = {}
 
   for (const line of csvDataByElements) {
-    checkCase (thresholds, line, `${line[2]}`, blacklist)
+    checkCase (thresholds, line, `${line[1]}`, blacklist)
   }
 
   console.log(thresholds)
@@ -118,7 +119,7 @@ async function main () {
   const durations: {[key: string]: [number]} = {}
 
   for (const line of csvDataByElements) {
-    checkCase (durations, line, `${line[3]}`, blacklist)
+    checkCase (durations, line, `${line[2]}`, blacklist)
   }
 
   console.log(durations)
@@ -127,7 +128,7 @@ async function main () {
   const combined: { [thresholdAndDurations: string]: number[] } = {}
 
   for (const line of csvDataByElements) {
-    const key: string = `t${line[2]}d${line[3]}`
+    const key: string = `t${line[1]}d${line[2]}`
     checkCase (combined, line, key, blacklist)
   }
 
@@ -137,6 +138,24 @@ async function main () {
   })
 
   console.log(ratio)
+
+  const result: any = {
+    blacklist,
+    thresholds,
+    durations,
+    combined: ratio,
+  }
+
+  const resultJSON: string = JSON.stringify(result)
+
+  writeFile(resolve(__dirname, `./out/out_${fileTag}_${Date.now()}.json`), resultJSON, (error) => {
+    if (error) {
+      return console.error(error)
+    }
+
+    console.log('file written')
+  })
+
 }
 
 main()
