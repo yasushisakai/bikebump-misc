@@ -41,14 +41,13 @@ void DeltaHistoryPlotter::pushDelta (
         });
 
     y = ofMap(maxValue, maxDelta, 0.0f, 0.0f, fbo.getHeight());
-   /* 
-    if (info -> state == INITIAL || info -> state == WAITING) {
-      isAbove = maxValue > threshold;
-    } else {
-      isAbove = maxValue > threshold * 0.75;
+    
+    float coef = 1.0f;
+    if ( info -> state == LEAVING ) {
+      coef =  1.0f;
     }
-  */
-  isAbove = maxValue > threshold;
+  
+    isAbove = maxValue > (coef * threshold);
 
     maxPoints.push_back(ofPoint{x, y});
   }
