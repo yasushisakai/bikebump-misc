@@ -12,6 +12,12 @@
 #include <stdio.h>
 #include "ofMain.h"
 
+enum DetectionState: uint8_t {
+  INITIAL = 0,
+  WAITING,  // after detecting the threshold, it waits for a period to verify the ding
+  LEAVING,  // is untill it vanishes
+};
+
 class SoundClipInfo {
 
   inline int convertPositionToMS (const int & _pos) {
@@ -28,6 +34,7 @@ class SoundClipInfo {
   inline void incrementPosition () { position++; };
   inline int parameterToMSFromStart (const float & parameter) const { return (int)(parameter * msLength); };
   inline bool doesNeedToReset () const { return position >= length; };
+  inline void changeState (const DetectionState & newState ) { state = newState;}
 
   std::string filename;
 
@@ -38,6 +45,7 @@ class SoundClipInfo {
   int dataSize;
   float duration;
   int msLength;
+  DetectionState state;
 
   float targetFrequency;
   bool isRandom;
@@ -47,12 +55,6 @@ class SoundClipInfo {
   float positionParameter; // 0.0 - 1.0
   int positionMS;
 
-};
-
-enum DetectionStates: uint8_t {
-  INITIAL = 0,
-  WAITING,  // after detecting the threshold, it waits for a period to verify the ding
-  LEAVING,  // is untill it vanishes
 };
 
 #endif /* SoundMetaInfo_hpp */

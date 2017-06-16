@@ -14,7 +14,24 @@ void MetaInfoPanel::update() const {
     
     ofClear(white);
     ofSetColor(black);
-   
+
+    string stateString;
+
+    switch (info -> state) {
+        case INITIAL:
+            stateString = "initial";
+            break;
+        case WAITING:
+            stateString = "waiting";
+            break;
+        case LEAVING:
+            stateString = "LEAVING";
+            break;
+        default:
+            stateString = "";
+            break;
+    }
+
     // line 1
     ofPushMatrix();
     ofTranslate(0, Goodies::bitmapStringHeight);
@@ -35,6 +52,12 @@ void MetaInfoPanel::update() const {
     ofTranslate(Goodies::getBitMapStringWidth(channels) + 20, 0);
     string sampleRateString = "sample rate: "+ ofToString(info -> sampleRate);
     ofDrawBitmapString(sampleRateString, 0, 0);
+    ofPopMatrix();
+
+    // line 3
+    ofPushMatrix();
+    ofTranslate(0, Goodies::bitmapStringHeight * 3.5);
+    ofDrawBitmapString("state: " + stateString, 0, 0); 
     ofPopMatrix();
     
     fbo.end();

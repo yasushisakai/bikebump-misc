@@ -17,7 +17,8 @@ SoundClipInfo::SoundClipInfo (const std::string & _filename, const long & _lengt
     dataSize = ofToInt(ofTrim(ofSplitString(summaryList[6], ":")[1]));
     duration = (dataSize * 1000.0f) / (nChannels * sampleRate * bitsPerSample / 8); // ms
     msLength = convertPositionToMS(length);
-    
+
+    state = INITIAL;  
     
     vector<std::string> breakDownFilename = ofSplitString(ofSplitString(filename, ".")[0], "_");
     

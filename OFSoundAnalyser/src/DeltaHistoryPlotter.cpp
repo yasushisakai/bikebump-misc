@@ -8,7 +8,10 @@
 
 #include "DeltaHistoryPlotter.hpp"
 
-void DeltaHistoryPlotter::pushDelta (const float& _positionParameter, const float & _deltaValue) {
+void DeltaHistoryPlotter::pushDelta (
+    const float & _positionParameter, 
+    const float & _deltaValue
+    ) {
   deltaValues.push_back(_deltaValue);
 
   x = _positionParameter * fbo.getWidth();
@@ -38,8 +41,14 @@ void DeltaHistoryPlotter::pushDelta (const float& _positionParameter, const floa
         });
 
     y = ofMap(maxValue, maxDelta, 0.0f, 0.0f, fbo.getHeight());
-
-    isAbove = maxValue > threshold;
+   /* 
+    if (info -> state == INITIAL || info -> state == WAITING) {
+      isAbove = maxValue > threshold;
+    } else {
+      isAbove = maxValue > threshold * 0.75;
+    }
+  */
+  isAbove = maxValue > threshold;
 
     maxPoints.push_back(ofPoint{x, y});
   }

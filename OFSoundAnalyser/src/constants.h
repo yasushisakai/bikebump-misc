@@ -36,7 +36,7 @@ constexpr float thresholdInc {10.0f};
 
 // out
 
-const string fileOut = "out_res0.csv";
+const string fileOut = "out_debug.csv";
 
 //
 // layout

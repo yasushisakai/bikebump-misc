@@ -161,7 +161,7 @@ void ofApp::initializeSoundClip(const int & _newFileCount) {
 
   needsRecord = true;
 
-  // clear folder and make dir
+  // state = INITIAL;
   auto saveDir = ofDirectory{ "/out/" + filename };
 
   if (saveDir.exists()) {
@@ -205,7 +205,7 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
       ofFile file;
       file.open(ofToDataPath(fileOut), ofFile::Append, false);
       file << soundInfoPtr -> filename << ", ";
-      file << ", " << DeltaHistoryPlotter::threshold << ", " << detectionIndicator.thresholdLength;
+      file << DeltaHistoryPlotter::threshold << ", " << detectionIndicator.thresholdLength;
 
       file << ", waiting";
       for (auto range : waitingRanges) {
