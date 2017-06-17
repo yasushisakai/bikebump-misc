@@ -26,17 +26,17 @@ constexpr float highClampFreq { 4000 };
 
 constexpr int nAverage { 10 };
 
-constexpr float thresholdLengthMin = {0};
-constexpr float thresholdLengthMax = {400};
-constexpr float thresholdLengthInc = {100};
+constexpr float thresholdLengthMin = {100};
+constexpr float thresholdLengthMax = {201};
+constexpr float thresholdLengthInc = {25};
 
-constexpr float thresholdMin {1.0f};
-constexpr float thresholdMax {8.0f};
-constexpr float thresholdInc {2.0f};
+constexpr float thresholdMin {3.0f};
+constexpr float thresholdMax {5.1f};
+constexpr float thresholdInc {1.0f};
 
 // out
 
-const string fileOut = "out_res0.csv";
+const string fileOut = "out_res1.csv";
 
 //
 // layout
