@@ -153,8 +153,10 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 }
 
 void ofApp::initializeSoundClip(const int & _newFileCount) {
-
   string filename = soundClipDir.getName(_newFileCount);
+
+  ofLogNotice(filename, "started");
+  ofLogNotice("");
 
   soundClip.load(ofToDataPath("soundClips/" + filename));
   soundInfoPtr = std::make_shared<SoundClipInfo> (SoundClipInfo(filename, soundClip.getLength(), soundClip.getSummary()));
@@ -261,9 +263,7 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
       detectionIndicator.init();
 
       if (DeltaHistoryPlotter::incrementThreshold()) {
-        ofLogNotice("incrementThreshold capped");
         if (detectionIndicator.incrementThresholdLength()) {
-          ofLogNotice("increment Threshold Length capped");
           fileCount ++;
           if (fileCount < soundClipDir.size()) {
             initializeSoundClip(fileCount);

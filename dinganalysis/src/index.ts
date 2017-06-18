@@ -1,9 +1,6 @@
 import { createReadStream, createWriteStream, readFile, writeFile } from 'fs'
 import { resolve } from 'path'
 
-const fileTag = 'res0'
-const csvFilePath: string = resolve ( __dirname, `../../OFSoundAnalyser/bin/data/out_${fileTag}.csv`)
-
 function readFilePromise (filePath: string): Promise<string []> {
   return new Promise((resolve, reject) => {
     readFile(filePath, (error, buffer: Buffer) => {
@@ -36,32 +33,19 @@ function bellFrequencyMap (bellName: string): number {
   }
 }
 
-function folderCodeMap (folder: string): string {
-  switch (folder) {
-    case 'noisy-single' :
-      return 'n_1_0'
-    case 'noisy-double' :
-      return 'n_0_1'
-    case 'silent-single' :
-      return 's_1_0'
-    case 'silent-double' :
-      return 's_0_1'
-  }
-}
-
 function didItMatch (line: string[]): boolean {
+  // console.log(line)
   let count = 0
   for (const element of line) {
     count++
     if (element.trim() === 'didPass') {
-      return line[count] === '1'
+      return line[count].trim() === '1'
     }
   }
   return false
 }
 
 function checkCase (baseObj: any, line: string[], key: string, blacklist: string[] = []): void {
-
   for (const black of blacklist) {
     if (black === line[0]) {
       return
@@ -76,10 +60,14 @@ function checkCase (baseObj: any, line: string[], key: string, blacklist: string
   if (didItMatch(line)) {
     baseObj[key][1] ++
   }
-
 }
 
 async function main () {
+  console.log(process.argv[2])
+
+  const fileTag: string = process.argv[2] ? process.argv[2] : 'res0'
+  const csvFilePath: string = resolve ( __dirname, `../../OFSoundAnalyser/bin/data/out_${fileTag}.csv`)
+
   const csvData: string[] = await readFilePromise(csvFilePath)
 
   // console.log(csvData)
@@ -100,7 +88,7 @@ async function main () {
     const results = recordings[key]
     const ratio = results[1] / results[0]
     if (results[1] < 1) {
-      blacklist.push(key)
+      // blacklist.push(key)
     }
   })
 
@@ -155,7 +143,6 @@ async function main () {
 
     console.log('file written')
   })
-
 }
 
 main()
