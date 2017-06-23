@@ -156,7 +156,6 @@ void ofApp::initializeSoundClip(const int & _newFileCount) {
   string filename = soundClipDir.getName(_newFileCount);
 
   ofLogNotice(filename, "started");
-  ofLogNotice("");
 
   soundClip.load(ofToDataPath("soundClips/" + filename));
   soundInfoPtr = std::make_shared<SoundClipInfo> (SoundClipInfo(filename, soundClip.getLength(), soundClip.getSummary()));
@@ -171,7 +170,7 @@ void ofApp::initializeSoundClip(const int & _newFileCount) {
   }
 
   // saveDir.create(true); // permission denied
-  ofDirectory::createDirectory("out/" + filename);
+  // ofDirectory::createDirectory("out/" + filename);
 
   changeFile();
 }
@@ -206,17 +205,17 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
 
       ofFile file;
       file.open(ofToDataPath(fileOut), ofFile::Append, false);
-      file << soundInfoPtr -> filename << ", ";
-      file << DeltaHistoryPlotter::threshold << ", " << detectionIndicator.thresholdLength;
+      file << soundInfoPtr -> filename << ",";
+      file << DeltaHistoryPlotter::threshold << "," << detectionIndicator.thresholdLength;
 
-      file << ", waiting";
+      file << ",waiting";
       for (auto range : waitingRanges) {
         for (auto key : range) {
           file << ", " << soundInfoPtr -> parameterToMSFromStart(key);
         }
       }
 
-      file << ", leaving";
+      file << ",leaving";
       for (auto range : leavingRanges) {
         for (auto key : range) {
           file << ", " << soundInfoPtr -> parameterToMSFromStart(key);
@@ -237,17 +236,17 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
         }
       }
 
-      file << ", didPass, " << didPass;
+      file << ",didPass," << didPass;
 
       if (numWaitings == 2) {
         int betweenWaitings = soundInfoPtr -> parameterToMSFromStart(waitingRanges[1][0] - waitingRanges[1][0]);
 
-        file << ", detectionBtwn, " << betweenWaitings;
+        file << ",detectionBtwn," << betweenWaitings;
       }
       
       if (numWaitings > 0) {
         int betweenWhole = soundInfoPtr -> parameterToMSFromStart(leavingRanges[leavingRanges.size() - 1][1] - waitingRanges[0][0]);
-        file << ", detectionWhole," << betweenWhole;
+        file << ",detectionWhole," << betweenWhole;
 
         if (leavingRanges[leavingRanges.size() - 1][1] == 1.0f) {
           file << "+";
